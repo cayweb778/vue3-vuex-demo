@@ -1,0 +1,275 @@
+.container {
+    width: 1198px;
+    height: inherit;
+    margin-top: 27px;
+    position: relative;
+    background: white;
+    z-index: 1;
+    padding: 0;
+}
+.container ul[class^="table_"].table_head {
+    width: 1100px;
+    margin-left: 49px;
+}
+.container ul[class^="table_"].table_head .title_name {
+    font-weight: 900;
+    font-size: 16px;
+    font-family: 'PingFang SC';
+    color: black;
+}
+.container ul[class^="table_"].table_head li.col-serial {
+    border-left: solid 1px #d0d0d0;
+    text-align: center;
+}
+.container ul[class^="table_"].table_head > li.col1 {
+    border-left: solid 1px #d0d0d0;
+}
+.container ul[class^="table_"].table_head > li.col-dai {
+    border-right: solid 1px #d0d0d0;
+}
+.container ul[class^="table_"].table_head > li.col-jie,
+.container ul[class^="table_"].table_head > li.col-dai {
+    padding-top: 0;
+}
+.container ul[class^="table_"].table_head > .col-jie > div,
+.container ul[class^="table_"].table_head .col-dai > div {
+    padding-top: 11px;
+    padding-bottom: 11px;
+    border-bottom: 1px solid #d0d0d0;
+}
+.container ul.table_head [class^="col"] {
+    width: 25%;
+    padding-top: 18px;
+    text-align: center;
+    border-top: 0;
+}
+.container ul.table_head .manyGridTitle {
+    float: right;
+}
+.container ul[class^="table_"].table_body {
+    width: 1100px;
+    margin-left: 49px;
+}
+.container ul[class^="table_"].table_body li.col-serial {
+    border-left: solid 1px #d0d0d0;
+    text-align: center;
+    padding-top: 21px;
+}
+.container ul[class^="table_"].table_body li.col1 {
+    border-left: solid 1px #d0d0d0;
+}
+.container ul[class^="table_"].table_body li.col1 .ulList {
+    width: 267.5px !important;
+}
+.container ul[class^="table_"].table_body li.col2 .ulList {
+    width: 407.5px !important;
+}
+.container ul[class^="table_"].table_body li.col-dai {
+    border-right: solid 1px #d0d0d0;
+}
+.container ul[class^="table_"].table_sumRow {
+    width: 1100px;
+    margin-left: 49px;
+}
+.container ul[class^="table_"].table_sumRow > li.sumCol {
+    width: calc(100% - 195 * 2px);
+    border-left: solid 1px #d0d0d0;
+}
+.container ul[class^="table_"].table_sumRow > li.col-dai {
+    border-right: solid 1px #d0d0d0;
+}
+.container ul[class^="table_"].table_sumRow > li.col-jie,
+.container ul[class^="table_"].table_sumRow > li.col-dai {
+    padding-top: 0;
+    border-bottom: solid 1px #d0d0d0;
+}
+.container ul[class^="table_"].table_sumRow > .col-jie > div,
+.container ul[class^="table_"].table_sumRow .col-dai > div {
+    padding-top: 11px;
+    padding-bottom: 11px;
+    border-bottom: 1px solid #d0d0d0;
+}
+.container textarea {
+    resize: none;
+}
+.container .moneyGrid li {
+    width: 15px !important;
+}
+.container ul[class^="table_"] > li {
+    vertical-align: top;
+}
+.container ul.lastRow .col-serial {
+    width: 10%;
+    border-right: 0;
+    border-left: 0;
+}
+.container ul.lastRow .col1 {
+    width: 15%;
+    border-right: 0;
+    border-left: 0;
+}
+.container ul.lastRow .col1 {
+    width: 25%;
+    border-right: 0;
+    border-left: 0;
+}
+.container ul.lastRow .col2 {
+    width: 25%;
+    border-right: 0;
+}
+.container ul.lastRow .col-jie {
+    width: 25%;
+    border-right: 0;
+}
+.container ul.lastRow .col-dai {
+    width: 25%;
+    border-right: 0;
+}
+.container ul {
+    padding: 0;
+}
+.container.hasCol3 ul[class^="table_"] .col1 {
+    width: 167.5px;
+}
+.container.hasCol3 ul[class^="table_"] .col2 {
+    width: 307.5px;
+}
+.container.hasCol3 ul[class^="table_"] .col3 {
+    border-right: 0;
+    border-bottom: 0;
+    width: 200px;
+    display: block;
+}
+.container.hasCol4 ul[class^="table_"] .col1 {
+    width: 217.5px;
+}
+.container.hasCol4 ul[class^="table_"] .col2 {
+    width: 357.5px;
+}
+.container.hasCol4 ul[class^="table_"] .col4 {
+    border-right: 0 !important;
+    border-bottom: 0!important;
+    width: 100px;
+    display: block;
+}
+.container.hasCol3.hasCol4 ul[class^="table_"] .col1 {
+    width: 117.5px;
+}
+.container.hasCol3.hasCol4 ul[class^="table_"] .col2 {
+    width: 257.5px;
+}
+.container.hasCol3.hasCol4 ul[class^="table_"] .col3 {
+    border-right: 0;
+    border-bottom: 0;
+    width: 200px;
+    display: block;
+}
+.container.hasCol3.hasCol4 ul[class^="table_"] .col4 {
+    border-right: 0;
+    border-bottom: 0;
+    width: 100px;
+    display: block;
+}
+.container ul[class^="table_"] {
+    display: block;
+    padding: 0;
+    margin: 0;
+}
+.container ul[class^="table_"] [class^="col"] {
+    float: left;
+    width: 100px;
+    height: 60px;
+    list-style: none;
+    border: solid 1px #d0d0d0;
+    box-sizing: border-box;
+}
+.container ul[class^="table_"] [class^="col"] div {
+    vertical-align: top;
+}
+.container ul[class^="table_"] .col1 {
+    width: 267.5px;
+    border-right: 0;
+    border-bottom: 0;
+    border-left: 0;
+}
+.container ul[class^="table_"] .col-serial {
+    width: 35px;
+    border-right: 0;
+    border-bottom: 0;
+    border-left: 0;
+}
+.container ul[class^="table_"] .col2 {
+    width: 407.5px;
+    border-right: 0;
+    border-bottom: 0;
+}
+.container ul[class^="table_"] .col3 {
+    display: none;
+}
+.container ul[class^="table_"] .col4 {
+    display: none;
+}
+.container ul[class^="table_"] .col-jie {
+    width: 195px;
+    border-right: 0;
+    border-bottom: 0;
+}
+.container ul[class^="table_"] .col-dai {
+    width: 195px;
+    border-right: 0;
+    border-bottom: 0;
+}
+.container .table_sumRow .sumCol {
+    float: left;
+    width: 50%;
+    height: 60px;
+    border: solid 1px #d0d0d0;
+    border-right: 0;
+    border-left: 0;
+    box-sizing: border-box;
+}
+.container .table_sumRow [class^="col"] {
+    float: left;
+    border-bottom: solid 1px #d0d0d0;
+}
+.container [class^="col"] {
+    vertical-align: top;
+}
+.container li {
+    list-style: none;
+}
+.moneyGrid {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    width: calc(100% + 1px);
+    font-weight: 300;
+    white-space: nowrap;
+    box-sizing: border-box;
+    justify-content: space-between;
+}
+.moneyGrid li {
+    list-style: none;
+    border-right: solid 1px #d0d0d0;
+    box-sizing: border-box;
+}
+.moneyGrid li:nth-of-type(2) {
+    border-right: solid #a5d9f6 1px;
+    box-sizing: border-box;
+}
+.moneyGrid li:nth-of-type(5) {
+    border-right: solid #a5d9f6 1px;
+    box-sizing: border-box;
+}
+.moneyGrid li:nth-of-type(8) {
+    border-right: solid #a5d9f6 1px;
+    box-sizing: border-box;
+}
+.moneyGrid li:nth-of-type(11) {
+    border-right: solid #eeb9b9 1.5px;
+    box-sizing: border-box;
+}
+.moneyGrid li:last-child {
+    border-right: none;
+}

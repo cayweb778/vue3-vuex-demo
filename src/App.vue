@@ -1,27 +1,20 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+  <el-button @click="openAddPingZheng">
+    打开新增凭证
+  </el-button>
+  <el-button @click="openShowPingZheng">
+    打开查看凭证
+  </el-button>
+  <el-button>打开插入凭证</el-button>
+  <!--  <PingZheng />-->
 </template>
+<script setup lang="ts">
+import {useOpenAdd} from '../pingzheng-plugin-v3/pingzheng';
 
-<script lang="ts">
-import { Options, Vue } from 'vue-class-component';
-import HelloWorld from './components/HelloWorld.vue';
-
-@Options({
-  components: {
-    HelloWorld,
-  },
-})
-export default class App extends Vue {}
-</script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+function openAddPingZheng() {
+  useOpenAdd({zhiDanRen: '机器人01'});
 }
-</style>
+function openShowPingZheng() {
+  useOpenAdd({zhiDanRen: '机器人01'});
+}
+</script>
