@@ -1,0 +1,52 @@
+// 容器宽度
+@containerWidth: 1198px;
+// 容器高度
+@containerHeight: inherit;
+// 表宽度
+@tableWidth: 1100px;
+// 表高度
+@tableHeight: 500px;
+
+@moneyGrid: 15;
+@moneyGridsWidth: 13 * @moneyGrid;
+// 列3宽度
+@col3Width:200;
+// 列4宽度
+@col4Width:100;
+
+// col1和col2的反比例宽度
+@col1AndCol2Inverse: 70;
+
+// 前3列宽度
+@first3ColWidth: (@tableWidth - @moneyGridsWidth*2);
+
+//序号宽度
+@colSerialWidth: 35;
+
+// 列1 列2 总宽度
+@col1Col2Width: @tableWidth - @moneyGridsWidth*2 - @colSerialWidth;
+
+// 列1 列2 宽度 (默认)
+@col1Width:((@col1Col2Width)/2 - @col1AndCol2Inverse);
+@col2Width:((@col1Col2Width)/2 + @col1AndCol2Inverse);
+
+// 列1 列2 宽度 (有列3)
+@col1WidthForCol3:((@col1Col2Width - @col3Width)/2 - @col1AndCol2Inverse);
+@col2WidthForCol3:((@col1Col2Width - @col3Width)/2 + @col1AndCol2Inverse);
+
+// 列1 列2 宽度 (有列4)
+@col1WidthForCol4:((@col1Col2Width - @col4Width)/2 - @col1AndCol2Inverse);
+@col2WidthForCol4:((@col1Col2Width - @col4Width)/2 + @col1AndCol2Inverse);
+
+// 列1 列2 宽度 (有列3,列4)
+@col1WidthForCol3Col4:((@col1Col2Width - (@col3Width + @col4Width))/2 - @col1AndCol2Inverse);
+@col2WidthForCol3Col4:((@col1Col2Width - (@col3Width + @col4Width))/2 + @col1AndCol2Inverse);
+
+
+// 借方金额宽度
+@colJieWidth: @moneyGridsWidth;
+// 贷方金额宽度
+@colDaiWidth: @moneyGridsWidth;
+
+@sumColWidth: calc(((100% - (@moneyGridsWidth) * 2px)));
+@line: solid 1px #d0d0d0;

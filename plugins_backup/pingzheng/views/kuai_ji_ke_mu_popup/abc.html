@@ -1,0 +1,33 @@
+<html>
+<body>
+<div id="app">
+    <abc></abc>
+</div>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.10/vue.min"></script>
+<script>
+    let a = new Vue({
+        on:{
+            aa:()=>{
+                alert(2)
+            }
+        },
+        el: '#app',
+        components: {
+            abc: {
+                mounted(){
+                    this.$emit('aa')
+                }
+            }
+        },
+        mounted() {
+            setTimeout(() => {
+                this.$emit('aa')
+            }, 1000)
+        }
+    })
+    // a.$on('aa', () => {
+    //     alert(1)
+    // })
+</script>
+</body>
+</html>

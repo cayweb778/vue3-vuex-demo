@@ -1,0 +1,20 @@
+<script>
+    function log(time) {
+        return new Promise((resolve, reject) => {
+            setTimeout(function () {
+                resolve('555')
+            }, time)
+        })
+    }
+
+    async function fun() {
+        console.log(1)
+        let c=await log(1000)
+        console.log(c)
+    }
+
+</script>
+
+<div>
+    <div onclick="fun()">a</div>
+</div>

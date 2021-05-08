@@ -1,0 +1,9 @@
+.pingZhengTheme-default{
+    border-radius: 30px !important;
+    background:#f0f2f5;
+    border:none
+}
+.pingZhengTheme-default .layui-layer-title{
+    height: 31px !important;
+    opacity: 0;
+}

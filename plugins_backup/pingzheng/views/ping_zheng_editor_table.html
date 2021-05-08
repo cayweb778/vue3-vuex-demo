@@ -1,0 +1,150 @@
+<!-- 凭证表格页 -->
+<div class="addKmPage" style="clear:both;margin:0 auto">
+    <div id="choose-box-wrapper4" style="display: none">
+        <div class="widget flat radius-bordered" style="padding:0 10px 0;">
+            <div style="width: 755px;height: 276px;overflow:auto;" id="helpContent">
+            </div>
+        </div>
+    </div>
+    <div class="container" :class="isFuZhuHeSuan?'hasCol3':''" @keydown="  if($event.ctrlKey == true && $event.keyCode == 83) {event.preventDefault();}"@keyup="saveKeyup($event)">
+        <ul class="table_head">
+            <li class="col-serial title_name">序号</li>
+            <li class="col1 title_name">摘要</li>
+            <li class="col2 title_name">会计科目</li>
+            <li class="col3 title_name" style="padding-top:18px">
+                辅助核算
+            </li>
+            <li class="col4">
+            </li>
+            <li class="col-jie" style="position: relative">
+                <div class="title_name">借方金额</div>
+
+                <ul class="moneyGrid" style="height:15px;text-align: center">
+                    <li v-for="unit in _moneyBase" style=";font-size:12px">{{unit}}</li>
+                </ul>
+            </li>
+            <li class="col-dai" style="position: relative">
+                <div class="title_name">贷方金额</div>
+                <ul class="moneyGrid" style="height:15px;text-align: center;width:100.95%">
+                    <li v-for="unit in _moneyBase" style=";font-size:12px">{{unit}}</li>
+                </ul>
+            </li>
+        </ul>
+        <div class="voucher-item" style="overflow-y:auto;height:241px;clear: both">
+
+            <ul class="table_body" :style="EditorType=='show'?'pointer-events: none;':''">
+
+                <ul v-for="(row,i) in pingZhengModel.rows" @mouseover="$set(    pingZhengRowHover,i,true)"
+                    @mouseout="$set(pingZhengRowHover,i,false)" class="firstRow"
+                    style="position: relative">
+                    <template v-if="!showPage">
+                        <div style="width:0;float:left;padding:0;display:block;border:0;left: 0;position:absolute;-moz-user-select:none;"
+                             colspan="0" unselectable="on" onselectstart="return false;">
+                            <div v-show="pingZhengRowHover[i]"
+                                 @click="insertTr(i),setTimeout(function(){trBeShow(i)}.bind(this))"
+                                 style="    position: absolute;
+    left: -49px;width:50px;height: 60px;">
+                                <img style="position:absolute;left:-2px;cursor:pointer;margin-top:16px;margin-left:29px;width:20px"
+                                     class="subtractionImg"/></div>
+                        </div>
+                    </template>
+                    <li class="col-serial">
+                        {{i+1}}
+                    </li>
+                    <li class="col1">
+                        <zhaiYaoGrid :ref="'abstractGrid'+i" :val="row.zhaiYao" :abstracts="abstracts"
+                                      :key="row.zhaiYao,abstracts"
+                                      @next="setTimeout(function(){focusKuaiJiKeMuGrid(i)}.bind(this))"
+                                      @change="row.zhaiYao=$event">
+                        </zhaiYaoGrid>
+                    </li>
+                    <li class="col2">
+                        <kuaiJiKeMuGrid :ref="'zhaiYaoGrid'+i" v-if="subs.length" :val="row.kuaiJiKeMuFullName"
+                                     :updatePage='updatePage'
+                                     :rowIndex="i+1"
+                                     :assistVal="assist[i]" :iyear="iyear" :subs='subs'
+                                     :key="row.kuaiJiKeMuFullName,iyear,billSubjectMoneys,subs"
+                                     @change="kemuChange(i,arguments)">
+                        </kuaiJiKeMuGrid>
+                    </li>
+
+                    <li class="col3" style="">
+                        <el-popover popper-class="fuzhuhesuan_popover"
+                                    v-if="$parent.pingZhengModel.rowsFuZhuHeSuan!=null"
+                                    placement="bottom"
+                                    title="需要辅助核算"
+                                    @show="$refs['fuZhuHeSuanPopup'][i].focusFirstFuZhuHeSuanSelect()"
+                                    trigger="click">
+                            <fuZhuHeSuanPopup
+                                ref="fuZhuHeSuanPopup"
+                                @ok="setTimeout(()=>tShow($refs['jGrid' + i][0].parentElement),500)"
+                                              v-model="pingZhengModel.rows[i]"/>
+                            <div slot="reference" style="height:100%">
+                                <fuZhuHeSuanHtml
+                                    ref="fuZhuHeSuanHtml"
+                                                 :value="castFuZhuHeSuanHtml(row)"/>
+
+                            </div>
+                        </el-popover>
+                    </li>
+                    <li class="col4">
+                    </li>
+                    <li class="col-jie" style="position: relative">
+                       <textarea :ref="'jGrid'+i"
+                                 onkeydown="checkEnter(event)"
+                                 @blur="row.jieMoney=row.jieMoney==''?'0.00':row.jieMoney,row.jieMoney!=0?clearRightVal($event.target):'',keyUpSetVal($event.target,'jieMoney'),formatMoney($event.target,'jieMoney'),rowsWatch(pingZhengModel.rows)"
+                                 class="textx"
+                                 v-model="row.jieMoney" @input="jieDaiInputHandle(i,'jieMoney',$event.target)"
+                                 @keyup.enter.stop="row.jieMoney==''||row.jieMoney=='0.00'?colFeedJ($event.target):lineFeed(i,row.zhaiYao)"
+                                 style="box-sizing:border-box;display:none;height:60px !important;line-height: 50px"></textarea>
+                        <money-grid @click="tShow($event.parentElement)">{{row.jieMoney}}</money-grid>
+                    </li>
+                    <li class="col-dai" style="position: relative">
+                     <textarea :ref="'dGrid'+i"
+                               v-model="row.daiMoney"
+                               @blur="row.daiMoney=row.daiMoney==''?'0.00':row.daiMoney,row.daiMoney!=0?clearLeftVal($event.target):'',keyUpSetVal($event.target,'daiMoney'),row.daiMoney=parseFloat(row.daiMoney).toFixed(2),rowsWatch(pingZhengModel.rows)"
+                               onkeydown="checkEnter(event)" @input="jieDaiInputHandle(i,'daiMoney',$event.target)"
+                               @keyup.enter="lineFeed(i,row.zhaiYao)"
+                               class="textx"
+                               style="box-sizing:border-box;display:none;height:60px !important;line-height: 50px"></textarea>
+                        <money-grid @click="tShow($event.parentElement)">{{row.daiMoney}}</money-grid>
+                    </li>
+                    <template v-if="!showPage">
+                        <div style="width:0;padding:0;display:block;border:0;position:absolute;right: 0;-moz-user-select:none;"
+                             colspan="0" unselectable="on" onselectstart="return false;">
+                            <div v-show="pingZhengRowHover[i]" v-if="abstracts.length"
+                                 @click="delTr(i),trBeHide(i),trBeShow(i+1)"
+                                 style="    width: 31px;
+    height: 60px;
+    position: absolute;
+    right: -32px;
+    text-align: right;
+    cursor: pointer;">
+                                <img class="addImg"
+                                     style="width:20px;margin-top:16px;-moz-user-select:none;"
+                                     unselectable="on" onselectstart="return false;"/>
+                            </div>
+                        </div>
+                    </template>
+                    <li style="clear: both"></li>
+                </ul>
+                <li style="clear:both;"></li>
+
+            </ul>
+        </div>
+        <ul class="table_sumRow" style="margin-top:-1px">
+            <li class="sumCol" style="padding-top: 20px;">
+                <span style="font-weight: 600; font-size: 17px;">合计：</span>
+                </span>&nbsp<span
+                    style="font-size:17px;font-weight: 900">{{billSumMoney2}}</span></li>
+            <li class="col-jie" style="position: relative">
+                <money-grid>{{billSumMoneyJM}}</money-grid>
+            </li>
+            <li class="col-dai" style="position: relative">
+                <money-grid>{{billSumMoneyDM}}</money-grid>
+            </li>
+        </ul>
+        <div style="clear:both"></div>
+    </div>
+</div>
+

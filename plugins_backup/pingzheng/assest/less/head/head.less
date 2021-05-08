@@ -1,0 +1,46 @@
+@import "../base/base.less";
+ul[class^="table_"].table_head {
+  width: @tableWidth;
+  margin-left: (@containerWidth - @tableWidth) / 2;
+
+   .title_name {
+    font-weight: 900;
+    font-size: 16px;
+    font-family: 'PingFang SC';
+    color:black;
+  }
+  li.col-serial{
+    border-left: solid 1px #d0d0d0;
+    text-align: center;
+  }
+  > li.col1 {
+    border-left: solid 1px #d0d0d0;
+  }
+
+  > li.col-dai {
+    border-right: solid 1px #d0d0d0;
+  }
+
+  > li.col-jie, > li.col-dai {
+    padding-top: 0;
+  }
+
+  > .col-jie > div, .col-dai > div {
+    padding-top: 11px;
+    padding-bottom: 11px;
+    border-bottom: 1px solid #d0d0d0;
+  }
+}
+
+ul.table_head {
+  [class^="col"] {
+    width: 25%;
+    padding-top: 18px;
+    text-align: center;
+    border-top: 0;
+  }
+
+  .manyGridTitle {
+    float: right;
+  }
+}

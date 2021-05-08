@@ -1,0 +1,24 @@
+@import "../base/base.less";
+ul[class^="table_"].table_body {
+  width: @tableWidth;
+  margin-left: (@containerWidth - @tableWidth) / 2;
+  li.col-serial{
+    border-left: solid 1px #d0d0d0;
+    text-align: center;
+    padding-top: 21px;
+  }
+  li.col1 {
+    border-left: solid 1px #d0d0d0;
+    .ulList{
+      width: @col1Width !important;
+    }
+  }
+  li.col2 {
+    .ulList{
+      width: @col2Width !important;
+    }
+  }
+  li.col-dai {
+    border-right: solid 1px #d0d0d0;
+  }
+}

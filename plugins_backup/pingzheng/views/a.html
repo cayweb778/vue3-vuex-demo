@@ -1,0 +1,57 @@
+<div id="app">
+  <table border="1" cellpadding="10">
+    <tbody>
+      <tr v-for="row in pingZhengRows">
+        <td>{{row.col1}}</td>
+        <td>{{row.col2}}</td>
+        <td>{{row.col3}}</td>
+        <td v-html="castPingZhengHtml(row)"></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.12/vue.min"></script>
+
+<script>
+  function queryCol1Value(col1){
+    return new Promise((resolve, reject)=>{
+      resolve('col1：'+'500')
+    })
+  }
+  function queryCol2Value(col2){
+    return new Promise((resolve, reject)=>{
+      resolve('col2：'+'1500')
+    })
+  }
+  function queryCol3Value(col3){
+    return new Promise((resolve, reject)=>{
+      resolve('col3：'+'2500')
+    })
+  }
+
+  new Vue({
+    el:'#app',
+    data(){
+      return {
+        pingZhengRows:[
+          {col1:1,col2:1,col3:1},
+          {col1:1,col2:1,col3:1},
+          {col1:1,col2:1,col3:1},
+          {col1:1,col2:1,col3:1}
+        ]
+      }
+    },
+    methods:{
+      async castPingZhengHtml(row){
+        const col1Html=await queryCol1Value(row)
+        const col2Html=await queryCol2Value(row)
+        const col3Html=await queryCol3Value(row)
+        return `
+          ${col1Html}<br>
+          ${col2Html}<br>
+          ${col3Html}<br>
+        `
+      }
+    }
+  })
+</script>

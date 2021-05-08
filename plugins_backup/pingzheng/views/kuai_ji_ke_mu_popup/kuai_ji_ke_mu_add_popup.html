@@ -1,0 +1,85 @@
+<div class='subject_add'
+     style="position:fixed;width:100%;height:100%;background:rgba(0,0,0,0.75);left:0;top:0;z-index: 2999000000">
+    <div style="width:30%;height:70%;position:absolute;left:34%;top:calc( (100% - 420px) / 2);width:420px;z-index:500;border-radius: 10px">
+        <div class="dy_ul_list" style="z-index:9999999999999999999999999;background:white;height: 280px;width:100%">
+            <h1 class="caption">新增科目</h1>
+            <ul class="content" style="overflow-y:inherit;width:inherit;height: 170px">
+                <li>
+                    科目名称:
+                    <input type="text" v-model="dataPageKMAdd.addData.ccodeName" ref="KMNameInput"
+                           @keyup.enter="$refs['topSubjectInput'].click()" style="width:260px;"/>
+                </li>
+                <li>
+                    上级科目:
+                    <div class="selectChoose" style="float: initial;display:inline">
+                        <!-- <input type="hidden" v-model="dataPageKMAdd.queryData.like" v-model="dataPageKMAdd.queryData.like"/>-->
+                        <input type="text" ref="topSubjectInput"
+                               onclick="this.select();"
+                               @focus="$refs.dataList.style.display='block'"
+                               @blur="$refs.dataList.style.display='none'"
+                               @input="queryKM(dataPageKMAdd.queryData),$event.target.focus()"
+                               @keydown.up="if(chooseIndex>0)chooseIndex--"
+                               @keydown.down="if(chooseIndex< dataPageKMAdd.topNameList.length-1)chooseIndex++"
+                               @keyup.enter="$refs.dataList.getElementsByTagName('LI')[chooseIndex].click(),setTimeout(()=>{$refs['kuaiJiKeMuNumInput'].click()},100)"
+                               v-model="dataPageKMAdd.queryData.like"
+                               style="width:260px;cursor: pointer;text-align: center"/>
+                        <ul ref='dataList'
+                            style="display:none;top:20px;left:0px;overflow: scroll;height:300px;text-align: left">
+                            <li v-for="(topObj,index) in dataPageKMAdd.topNameList"
+                                @click="chooseTopKM(topObj.ccode,topObj.ccodename,topObj)"
+                                @mousedown="$event.target.click()"
+                                :class="index==chooseIndex?'active':''">
+                                {{topObj.ccode}} {{topObj.ccodename}}
+                            </li>
+                        </ul>
+                        <div style="clear: both"></div>
+                    </div>
+                </li>
+                <!--   <li>
+                       科目类型:
+                       <input type="text" placeholder="资产" readonly="readonly"  style="cursor: pointer"/>
+                   </li>-->
+                <li>
+                    科目编码:
+                    <input type="text" ref="kuaiJiKeMuNumInput" readonly="readonly" onclick="this.select();"
+                           style="cursor: pointer"
+                           @keyup.enter="$refs['kmAddPageAffirm'].click()"
+                           v-model="dataPageKMAdd.addData.ccodeNum" style="width:260px;"/>
+                </li>
+
+                <li style="display:none">
+                    余额方向:
+                    <div class="radioContainer" style="color:grey">
+                        <template v-if="dataPageKMAdd.addData.bproperty==1">
+                            <div class="radio" @click="dataPageKMAdd.addData.bproperty=1">
+                                <i class="layui-anim layui-icon"></i>借
+                            </div>
+                            <div class="radio" style="margin-left:20px" @click="dataPageKMAdd.addData.bproperty=0">
+                                <i class="layui-anim layui-icon"></i>贷
+                            </div>
+                        </template>
+                        <template v-if="dataPageKMAdd.addData.bproperty==0">
+                            <div class="radio" @click="dataPageKMAdd.addData.bproperty=1">
+                                <i class="layui-anim layui-icon"></i>借
+                            </div>
+                            <div class="radio" style="margin-left:20px" @click="dataPageKMAdd.addData.bproperty=0">
+                                <i class="layui-anim layui-icon"></i>贷
+                            </div>
+                        </template>
+                    </div>
+
+                </li>
+            </ul>
+            <div class="btnContainer" style="margin-top:10px">
+                <button class="dy_button" ref='kmAddPageAffirm'
+                        @click="addKM(dataPageKMAdd.addData),showPageAddKM=false">
+                    确认添加
+                </button>
+                <button class="dy_button"
+                        @click="$emit('cancel')">放弃
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>

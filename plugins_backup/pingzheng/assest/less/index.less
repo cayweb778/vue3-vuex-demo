@@ -1,0 +1,212 @@
+@import "./base/base.less";
+
+.container {
+  width: @containerWidth;
+  height: inherit;
+  //border: solid 1px #d0d0d0;
+  margin-top: 27px;
+  position: relative;
+  background: white;
+  z-index: 1;
+  padding: 0;
+  @import "./head/head.less";
+  @import "./body/body.less";
+  @import "./footer/footer.less";
+
+  textarea {
+    resize: none;
+  }
+
+  .moneyGrid li {
+    width: 15px !important;
+  }
+
+  ul[class^="table_"] {
+    > li {
+      vertical-align: top;
+    }
+  }
+
+
+  ul.lastRow {
+    .col-serial{
+      width: 10%;
+      border-right: 0;
+      border-left: 0;
+    }
+    .col1 {
+      width: 15%;
+      border-right: 0;
+      border-left: 0;
+    }
+
+    .col1 {
+      width: 25%;
+      border-right: 0;
+      border-left: 0;
+    }
+
+    .col2 {
+      width: 25%;
+      border-right: 0;
+    }
+
+    .col-jie {
+      width: 25%;
+      border-right: 0;
+    }
+
+    .col-dai {
+      width: 25%;
+      border-right: 0;
+    }
+  }
+
+  ul {
+    padding: 0;
+  }
+
+  &.hasCol3 ul[class^="table_"] {
+    .col1 {
+      width: @col1WidthForCol3;
+    }
+
+    .col2 {
+      width: @col2WidthForCol3;
+    }
+
+    .col3 {
+      border-right: 0;
+      border-bottom: 0;
+      width: @col3Width;
+      display: block;
+    }
+  }
+
+  &.hasCol4 ul[class^="table_"] {
+    .col1 {
+      width: @col1WidthForCol4;
+    }
+
+    .col2 {
+      width: @col2WidthForCol4;
+    }
+
+    .col4 {
+      border-right: 0 !important;
+      border-bottom: 0!important;
+      width: @col4Width;
+      display: block;
+    }
+  }
+
+  &.hasCol3.hasCol4 ul[class^="table_"] {
+    .col1 {
+      width: @col1WidthForCol3Col4;
+    }
+
+    .col2 {
+      width: @col2WidthForCol3Col4;
+    }
+
+    .col3 {
+      border-right: 0;
+      border-bottom: 0;
+      width: @col3Width;
+      display: block;
+    }
+
+    .col4 {
+      border-right: 0;
+      border-bottom: 0;
+      width: @col4Width;
+      display: block;
+    }
+
+  }
+
+  ul[class^="table_"] {
+    display: block;
+    padding: 0;
+    margin: 0;
+
+    [class^="col"] {
+      float: left;
+      width: 100px;
+      height: 60px;
+      list-style: none;
+      border: solid 1px #d0d0d0;
+      box-sizing: border-box;
+
+      div {
+        vertical-align: top;
+      }
+    }
+
+
+    .col1 {
+      width: @col1Width;
+      border-right: 0;
+      border-bottom: 0;
+      border-left: 0;
+    }
+    .col-serial {
+      width: @colSerialWidth;
+      border-right: 0;
+      border-bottom: 0;
+      border-left: 0;
+    }
+
+    .col2 {
+      width: @col2Width;
+      border-right: 0;
+      border-bottom: 0;
+    }
+
+    .col3 {
+      display: none;
+    }
+
+    .col4 {
+      display: none;
+    }
+
+    .col-jie {
+      width: @colJieWidth;
+      border-right: 0;
+      border-bottom: 0;
+    }
+
+    .col-dai {
+      width: @colDaiWidth;
+      border-right: 0;
+      border-bottom: 0;
+    }
+
+  }
+
+  .table_sumRow {
+    .sumCol {
+      float: left;
+      width: 50%;
+      height: 60px;
+      border: solid 1px #d0d0d0;
+      border-right: 0;
+      border-left: 0;
+      box-sizing: border-box;
+    }
+
+    [class^="col"] {
+      float: left;
+      border-bottom: @line;
+    }
+  }
+
+  [class^="col"] {
+    vertical-align: top;
+  }
+
+  li {
+    list-style: none;
+  }
+}

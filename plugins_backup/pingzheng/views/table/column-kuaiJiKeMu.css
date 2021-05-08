@@ -1,0 +1,7 @@
+.subGrid ul{
+    z-index:99;text-align: left;margin:0;padding:0;width:416px;background:white;overflow-y: scroll;border-bottom:solid 1px grey;height:200px
+}
+.dataList{
+    position:fixed;
+    display:none;z-index:99
+}
