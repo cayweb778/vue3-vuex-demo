@@ -4,7 +4,7 @@
       style="height:100%"
   >
     <textarea
-        onkeydown="checkEnter(event)"
+        @keydown="checkEnter(event)"
         ref="zhaiYaoInput"
         v-model="textareaVal"
         onclick="javascript:this.focus();this.select();"
@@ -13,7 +13,7 @@
         @keyup.ctrl.x="abstractUl($event.target)"
         @keydown.up="textareaKeyUp"
         @keydown.down="textareaKeyDown"
-        @keyup.enter.stop="setVal(),$emit('next')"
+        @keyup.enter.stop="setVal()"
         @input="chooseIndex=-1,listFitter($event.target),setTimeout(function(){$refs.dataList.value.style.display='block'}.bind(this))"
         class="ulToggle"
         style="box-sizing:border-box;background:inherit;display:block;font-size:15px;width:100%;height:100%;color:black;font-weight:800"
@@ -36,9 +36,10 @@
   </div>
 </template>
 <script setup lang="ts">
-import {computed, defineProps, nextTick, ref, useContext} from 'vue';
+import {computed, defineProps, getCurrentInstance, nextTick, ref, useContext, watch} from 'vue';
 import PinyinMatch from '../../../plugins/pinyin-match';
 import {zhaiYaoStore} from '../../../store/modules/zhaiYao';
+import {checkEnter} from '../../../util/key';
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 // @ts-nocheck
 // import {useCssLoad} from '../../../require-css/index';
@@ -51,7 +52,7 @@ const dataList = ref(null);
 const props = defineProps({
   val: {}
 });
-const val=JSON.parse(JSON.stringify(props.val))
+const val=null
 const zhaiYaoList = computed(() => zhaiYaoStore.getZhaiYaoList);
 
 function setVal() {
@@ -142,30 +143,33 @@ const bodyWidth = computed(function() {
 //     this.onDataListPostion(this.vouchTableScrollY);
 //   }
 // },
-// 'chooseIndex': function(newVal) {
-//   if (newVal == -1) return;
-//   this.$nextTick(function() {
-//     let ulHeight = dataList.value.clientHeight;
-//     let liHeight = dataList.value.getElementsByTagName('LI')[0].clientHeight;
-//     let activePosY = dataList.value.getElementsByClassName('active')[0].offsetTop + liHeight;
-//
-//     if ((activePosY - ulHeight) > 0) {
-//       dataList.value.scrollTop = activePosY - ulHeight - 2;
-//     } else {
-//       dataList.value.scrollTop = 0;
-//     }
-//   });
+watch(chooseIndex, function(newVal) {
+  if (newVal == -1) return;
+  nextTick(function() {
+    let ulHeight = dataList.value.clientHeight;
+    let liHeight = dataList.value.getElementsByTagName('LI')[0].clientHeight;
+    let activePosY = dataList.value.getElementsByClassName('active')[0].offsetTop + liHeight;
+
+    if ((activePosY - ulHeight) > 0) {
+      dataList.value.scrollTop = activePosY - ulHeight - 2;
+    } else {
+      dataList.value.scrollTop = 0;
+    }
+  })
+})
 setTimeout(function() {
-  onDataListPostion(vouchTableScrollY);
+  onDataListPostion();
 }.bind(this));
 
 
 function textareaKeyUp() {
-  if (chooseIndex > 0) chooseIndex.value--;
+  if (chooseIndex.value > 0) chooseIndex.value--;
 }
 
 function textareaKeyDown() {
-  if (chooseIndex < zhaiYaoListForShow.length - 1) chooseIndex.value++;
+  if (chooseIndex.value < zhaiYaoList.value.length - 1){
+    chooseIndex.value++;
+  }
 }
 
 function textareaBlur() {
@@ -178,6 +182,7 @@ function ulLiClick(zhaiYao){
   textareaVal.value=zhaiYao.accabname
   zhaiYaoInput.value.blur()
 }
+emit('ref',getCurrentInstance())
 </script>
 <style src="./column-zhaiYao.css"></style>
 

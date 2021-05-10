@@ -80,7 +80,7 @@
             :style="showPingZheng?'pointer-events: none;':''"
         >
           <ul
-              v-for="(row,i) in pingZhengModel.rows"
+              v-for="(row,i) in pingZhengModelStore.getPingZhengModel.rows"
               @mouseover="pingZhengRowHover[i]=true"
               @mouseout="pingZhengRowHover[i]=false"
               class="firstRow"
@@ -111,16 +111,15 @@
             </li>
             <li class="col1">
               <ZhaiYaoGrid
-                  :ref="setItemRef"
+                  @ref="zhaiYaoGrid[i]=$event"
                   :val="row.zhaiYao"
                   :abstracts="abstracts"
-                  @next="focusKuaiJiKeMuGrid(i)"
-                  @change="pingZhengModelStore.commitRowZhaiYao({rowIndex:i,zhaiYao:$event})"
+                  @change="zhaiYaoChange(i,$event)"
               />
             </li>
             <li class="col2">
               <KuaiJiKeMuGrid
-                  :ref="el => { if (el) kuaiJiKeMuGrid[i] = el }"
+                  @ref="kuaiJiKeMuGrid[i]=$event"
                   v-if="subs.length"
                   :val="row.kuaiJiKeMuText"
                   :update-page="updatePage"
@@ -128,7 +127,7 @@
                   :assist-val="assist[i]"
                   :iyear="iyear"
                   :subs="subs"
-                  @change="kemuChange(i,arguments)"
+                  @change="kuaiJiKeMuChange(i,arguments)"
               />
             </li>
 
@@ -136,28 +135,28 @@
                 class="col3"
                 style=""
             >
-              <el-popover
-                  popper-class="fuzhuhesuan_popover"
-                  placement="bottom"
-                  title="需要辅助核算"
-                  @show="$refs['fuZhuHeSuanPopup'][i].focusFirstFuZhuHeSuanSelect()"
-                  trigger="click"
-              >
-                <fuZhuHeSuanPopup
-                    ref="fuZhuHeSuanPopup"
-                    @ok="setTimeout(()=>focusTextEditor($refs['jGrid' + i][0].parentElement),500)"
-                    v-model="pingZhengModel.rows[i]"
-                />
-                <div
-                    slot="reference"
-                    style="height:100%"
-                >
-                  <fuZhuHeSuanHtml
-                      ref="fuZhuHeSuanHtml"
-                      :value="castFuZhuHeSuanHtml(row)"
-                  />
-                </div>
-              </el-popover>
+<!--              <el-popover-->
+<!--                  popper-class="fuzhuhesuan_popover"-->
+<!--                  placement="bottom"-->
+<!--                  title="需要辅助核算"-->
+<!--                  @show="$refs['fuZhuHeSuanPopup'][i].focusFirstFuZhuHeSuanSelect()"-->
+<!--                  trigger="click"-->
+<!--              >-->
+<!--                <fuZhuHeSuanPopup-->
+<!--                    ref="fuZhuHeSuanPopup"-->
+<!--                    @ok="setTimeout(()=>focusTextEditor($refs['jGrid' + i][0].parentElement),500)"-->
+<!--                    v-model="pingZhengModelStore.getPingZhengModel.rows[i]"-->
+<!--                />-->
+<!--                <div-->
+<!--                    slot="reference"-->
+<!--                    style="height:100%"-->
+<!--                >-->
+<!--                  <fuZhuHeSuanHtml-->
+<!--                      ref="fuZhuHeSuanHtml"-->
+<!--                      :value="castFuZhuHeSuanHtml(row)"-->
+<!--                  />-->
+<!--                </div>-->
+<!--              </el-popover>-->
             </li>
             <li class="col4"/>
             <li
@@ -167,7 +166,7 @@
               <textarea
                   :ref="(el) =>jGrid[i]=el"
                   onkeydown="checkEnter(event)"
-                  @blur="row.jieMoney=row.jieMoney==''?'0.00':row.jieMoney,row.jieMoney!=0?clearRightVal($event.target):'',keyUpSetVal($event.target,'jieMoney'),formatMoney($event.target,'jieMoney'),rowsWatch(pingZhengModel.rows)"
+                  @blur="row.jieMoney=row.jieMoney==''?'0.00':row.jieMoney,row.jieMoney!=0?clearRightVal($event.target):'',keyUpSetVal($event.target,'jieMoney'),formatMoney($event.target,'jieMoney'),rowsWatch(pingZhengModelStore.getPingZhengModel.rows)"
                   class="textx"
                   v-model="row.jieMoney"
                   @input="jieDaiInputHandle(i,'jieMoney',$event.target)"
@@ -185,7 +184,7 @@
               <textarea
                   :ref="(el) =>dGrid[i]=el"
                   v-model="row.daiMoney"
-                  @blur="row.daiMoney=row.daiMoney==''?'0.00':row.daiMoney,row.daiMoney!=0?clearLeftVal($event.target):'',keyUpSetVal($event.target,'daiMoney'),row.daiMoney=parseFloat(row.daiMoney).toFixed(2),rowsWatch(pingZhengModel.rows)"
+                  @blur="row.daiMoney=row.daiMoney==''?'0.00':row.daiMoney,row.daiMoney!=0?clearLeftVal($event.target):'',keyUpSetVal($event.target,'daiMoney'),row.daiMoney=parseFloat(row.daiMoney).toFixed(2),rowsWatch(pingZhengModelStore.getPingZhengModel.rows)"
                   onkeydown="checkEnter(event)"
                   @input="jieDaiInputHandle(i,'daiMoney',$event.target)"
                   @keyup.enter="lineFeed(i,row.zhaiYao)"
@@ -266,6 +265,7 @@ import {queryFuZhuHeSuanApi} from '../../../../plugins_backup/pingzheng/api/fu_z
 import apiProcess from '../../../../plugins_backup/pingzheng/data/data';
 import fuZhuHeSuanHelper from '../../../../plugins_backup/pingzheng/helper/fu_zhu_he_suan_Helper';
 import {convertCurrency} from '../../../../plugins_backup/pingzheng/helper/jizhangHelper';
+import {fuZhuHeSuanModel} from '../../../../plugins_backup/pingzheng/model/pingzheng_model';
 import {moneyBase} from '../../data/pingzheng';
 import {pingZhengModelStore} from '../../store/modules/pingZhengModel';
 import {showPingZhengStore} from '../../store/modules/showPingZheng';
@@ -274,7 +274,8 @@ import ZhaiYaoGrid from './table/column-zhaiYao.vue'
 import KuaiJiKeMuGrid from './table/column-kuaiJiKeMu.vue'
 import fuZhuHeSuanPopup from './fu_zhu_he_suan_popup/fu_zhu_he_suan_popup.vue'
 import fuZhuHeSuanHtml from './fu_zhu_he_suan_popup/fu_zhu_he_suan_popup.vue'
-const pingZhengModel = computed(() => pingZhengModelStore.getPingZhengModel);
+// const pingZhengModel = ref(pingZhengModelStore.getPingZhengModel);
+// console.log(pingZhengModel);
 const ChineseTotalAmount = ref('零元整');
 const jieTotalAmount = ref(5);
 const daiTotalAmount = ref(5);
@@ -726,7 +727,6 @@ const jGrid=ref([])
 const dGrid=ref([])
 const zhaiYaoGrid=ref([])
 const kuaiJiKeMuGrid=ref([])
-const kuaiJiKeMuGrid2=ref([])
 
 // 确保在每次变更之前重置引用
 onBeforeUpdate(()=>{
@@ -739,7 +739,7 @@ function focusJieGrid(rowIndex) {
 }
 
 function focusKuaiJiKeMuGrid(rowIndex) {
-  console.log(kuaiJiKeMuGrid2.value[0]);
+  kuaiJiKeMuGrid.value[rowIndex].refs.subInput.focus();
 }
 
 function focusTextEditor(source,textEL) {
@@ -1636,9 +1636,40 @@ function proprowsWatch(newVal, oldName) {
 
   }
 }
-setTimeout(()=>{
-  pingZhengModel.value.rows[0].zhaiYao='213213'
-},1000)
+function zhaiYaoChange(i,$event){
+
+  focusKuaiJiKeMuGrid(i)
+  pingZhengModelStore.commitRowZhaiYao({rowIndex:i,zhaiYao:$event})
+}
+function saveKeyup(e) {
+
+  e.preventDefault();
+  var currKey = 0, e = e || event || window.event;
+  currKey = e.keyCode || e.which || e.charCode;
+  if (currKey == 83 && (e.ctrlKey || e.metaKey)) {
+    this.$store.state.saveNewPingZhengAndContinue();
+    return false;
+  }
+}
+
+function rowFuZhuHeSuanModelSsFuZhuHeSuan(rowFuZhuHeSuanModel) {
+  let isFuZheHeSuan = false;
+  Object.keys(rowFuZhuHeSuanModel).forEach(key => {
+    if (rowFuZhuHeSuanModel[key] != null) {
+      isFuZheHeSuan = true;
+    }
+  });
+  return isFuZheHeSuan;
+}
+async function kuaiJiKeMuChange(rowIndex, [kuaiJiKeMuFullName]) {
+  const row = pingZhengModelStore.getPingZhengModel.rows[rowIndex];
+  row['kuaiJiKeMuFullName'] = kuaiJiKeMuFullName;
+  row['kuaiJiKeMuCode'] = kuaiJiKeMuFullName.split(' ')[0];
+  await this.fuZhuHeSuanHandle(row);
+  const rowFuZhuHeSuanModel = fuZhuHeSuanModel(row);
+  this.rowFuZhuHeSuanModelSsFuZhuHeSuan(rowFuZhuHeSuanModel) ? this.focusFuZhuHeSuan(rowIndex) : this.focusJieMoneyGrid(rowIndex);
+}
+
 </script>
 <style>
 @import "../../assets/styles/ping_zheng_editor_table.css";
