@@ -1,5 +1,6 @@
 import {Action, getModule, Module, Mutation, VuexModule} from 'vuex-module-decorators';
 import {store} from '../index';
+import {zhaiYaoStore} from './zhaiYao';
 
 const NAME = 'app';
 
@@ -114,6 +115,14 @@ class PingZhengModel extends VuexModule {
     @Mutation
     commitLockMainScrollState(lock: boolean): void {
         this.lockMainScrollState = lock;
+    }
+
+
+    @Mutation
+    commitRowZhaiYao({rowIndex,zhaiYao}:{rowIndex:number,zhaiYao:string}): void {
+        const a=JSON.parse(JSON.stringify(this.pingZhengModel))
+        a.rows[rowIndex].zhaiYao=zhaiYao
+        this.pingZhengModel=a
     }
 
 

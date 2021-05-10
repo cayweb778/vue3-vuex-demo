@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 // @ts-nocheck
 /* eslint-disable */
-import $ from '../../boozjs-jquery/boozjs-jquery';
+import _$ from '../../boozjs-jquery/boozjs-jquery';
 import {moneyHelper} from '../../boozjs-lang/money-util';
 import Vuex from '../../boozjs-vuex/3.x';
 import {queryFuZhuHeSuanApi} from '../api/fu_zhu_he_suan';
@@ -171,7 +171,7 @@ const fuZhuHeSuanColumnApi = {
             async: false,
             success: res1 => res = res1,
             error: function(xhr) {
-                $('body').html(xhr.responseText);
+                _$('body').html(xhr.responseText);
             }
         });
         return {
@@ -463,13 +463,13 @@ function getBaseMixin() {
                         /*_this.$set(_this.pingZhengModel.rows[i], 'orgin', res.map['orgin'])
                         _this.$set(_this.pingZhengModel.rows[i], 'kmye', res.map['money'])*/
                         if (parseFloat(res) < 0) {
-                            $(obj).find('span').css('color', 'red');
+                            _$(obj).find('span').css('color', 'red');
                         } else {
-                            $(obj).find('span').css('color', 'grey');
+                            _$(obj).find('span').css('color', 'grey');
                         }
                     },
                     error: function(xhr) {
-                        $('body').html(xhr.responseText);
+                        _$('body').html(xhr.responseText);
                     }
                 });
             },
@@ -649,83 +649,83 @@ function getBaseMixin() {
                 if (this.tShowBan == true) return;
                 const _this = this;
                 setTimeout(function() {
-                    $(obj).find('textarea').css('display', 'block');
+                    _$(obj).find('textarea').css('display', 'block');
                     setTimeout(function() {
-                        $(obj).find('textarea').focus();
+                        _$(obj).find('textarea').focus();
                     }, 500);
-                    $(obj).find('textarea').select();
-                    $(obj).find('ul').hide();
+                    _$(obj).find('textarea').select();
+                    _$(obj).find('ul').hide();
                 });
             },
             tHide(obj) {
-                $(obj).hide();
-                $(obj).closest('td').find('ul').show();
+                _$(obj).hide();
+                _$(obj).closest('td').find('ul').show();
             },
             ulShowJ(obj) {
-                $('#app td .ulX').hide();
-                $(obj).parent().find('ul').show();
+                _$('#app td .ulX').hide();
+                _$(obj).parent().find('ul').show();
             },
             // 凭证显示
             pingzhengUlShow(obj) {
-                $('#app td .ulX').hide();
-                $(obj).parent().find('ul').show();
-                $(obj).parent().find('ul>li').removeClass('active');
-                $(obj).parent().find('ul>li:first').toggleClass('active');
+                _$('#app td .ulX').hide();
+                _$(obj).parent().find('ul').show();
+                _$(obj).parent().find('ul>li').removeClass('active');
+                _$(obj).parent().find('ul>li:first').toggleClass('active');
             },
             ulShowD(obj) {
-                $('#app td .ulX').hide();
-                $(obj).parent().find('ul').show();
+                _$('#app td .ulX').hide();
+                _$(obj).parent().find('ul').show();
             },
             kjkmUlShow(obj) {
-                $(obj).closest('td').find('ul:first').css('top', ($(obj).parent().offset().top + $(obj).parent().height()) + 'px');
-                $(obj).closest('td').find('ul:first').css('left', $(obj).parent().offset().left + 'px');
-                $(obj).closest('td').find('ul:eq(1)').css('top', ($(obj).parent().offset().top + $(obj).parent().height() + 200) + 'px');
-                $(obj).closest('td').find('ul:eq(1)').css('left', $(obj).parent().offset().left + 'px');
+                _$(obj).closest('td').find('ul:first').css('top', (_$(obj).parent().offset().top + _$(obj).parent().height()) + 'px');
+                _$(obj).closest('td').find('ul:first').css('left', _$(obj).parent().offset().left + 'px');
+                _$(obj).closest('td').find('ul:eq(1)').css('top', (_$(obj).parent().offset().top + _$(obj).parent().height() + 200) + 'px');
+                _$(obj).closest('td').find('ul:eq(1)').css('left', _$(obj).parent().offset().left + 'px');
                 this.subFindSrowsAPI('');
-                $('#app td .ulX').hide();
-                console.log($(obj).parent().find('ul').size());
-                $(obj).parent().find('ul').show();
-                $(obj).parent().find('ul').each(function() {
-                    console.log($(this).css('display'));
+                _$('#app td .ulX').hide();
+                console.log(_$(obj).parent().find('ul').size());
+                _$(obj).parent().find('ul').show();
+                _$(obj).parent().find('ul').each(function() {
+                    console.log(_$(this).css('display'));
 
                 });
-                $(obj).parent().find('ul>li').removeClass('active');
-                $(obj).parent().find('ul>li:first').toggleClass('active');
+                _$(obj).parent().find('ul>li').removeClass('active');
+                _$(obj).parent().find('ul>li:first').toggleClass('active');
 
             },
             hintForAbstract(obj) {
-                // $(obj).attr("placeholder",'摘要列表:"ctrl+x"键')
+                // _$(obj).attr("placeholder",'摘要列表:"ctrl+x"键')
             },
             ulShow(obj) {
                 this.subFindSrowsAPI('');
-                $('#app td .ulX').hide();
-                $(obj).parent().find('ul').show();
-                $(obj).parent().find('ul>li').removeClass('active');
-                $(obj).parent().find('ul>li:first').toggleClass('active');
+                _$('#app td .ulX').hide();
+                _$(obj).parent().find('ul').show();
+                _$(obj).parent().find('ul>li').removeClass('active');
+                _$(obj).parent().find('ul>li:first').toggleClass('active');
             },
             ulHide(obj) {
-                $(obj).attr('placeholder', '');
+                _$(obj).attr('placeholder', '');
                 setTimeout(function() {
-                    $(obj).closest('td').find('ul').hide();
+                    _$(obj).closest('td').find('ul').hide();
                 }, 250);
             },
             ulHide2(obj) {
-                $(obj).closest('td').find('ul').hide();
+                _$(obj).closest('td').find('ul').hide();
             },
             // 键盘设置参数
             keyUpSetValJ(obj, type, code, path) {
                 // parm1 行数 , parm2 属性名  if判断是否借贷框输入
                 if (type == 'jieMoney' || type == 'daiMoney') {
                     this.ulShowJ(obj);
-                    $(obj).hide();
+                    _$(obj).hide();
                 } else {
 
-                    this.getBalance($(obj).closest('li').find('.balance span'), $(obj).attr('money'), $(obj).closest('ul').index());
-                    this.pingZhengModel.rows[$(obj).closest('ul').index()][type + '_num'] = $(obj).parent().find('.active').attr('money');
-                    this.pingZhengModel.rows[$(obj).closest('ul').index()][type] = $.trim(code) + ' ' + $.trim(path);
+                    this.getBalance(_$(obj).closest('li').find('.balance span'), _$(obj).attr('money'), _$(obj).closest('ul').index());
+                    this.pingZhengModel.rows[_$(obj).closest('ul').index()][type + '_num'] = _$(obj).parent().find('.active').attr('money');
+                    this.pingZhengModel.rows[_$(obj).closest('ul').index()][type] = $.trim(code) + ' ' + $.trim(path);
                     this.ulHide2(obj);
                     if (this.tShowBan == true) {
-                        this.rowFeed($(obj).closest('tr'));
+                        this.rowFeed(_$(obj).closest('tr'));
 
                     } else {
                         this.colFeedJ(obj);
@@ -737,34 +737,34 @@ function getBaseMixin() {
                 // parm1 行数 , parm2 属性名  if判断是否借贷框输入
                 if (type == 'jieMoney' || type == 'daiMoney') {
                     this.ulShowJ(obj);
-                    $(obj).hide();
+                    _$(obj).hide();
                 } else {
-                    this.pingZhengModel.rows[$(obj).closest('tr').index()][type] = $.trim($(obj).text());
+                    this.pingZhengModel.rows[_$(obj).closest('tr').index()][type] = $.trim(_$(obj).text());
                     this.ulHide(obj);
                     this.colFeed(obj);
                 }
             },
             textareaEnter(obj, type) {
-                if ($.trim($(obj).next().find('.active').text()) == '') {
-                    //this.pingZhengModel.rows[$(obj).closest("tr").index()][type] = $.trim($(obj).next().find(".active").text())
+                if ($.trim(_$(obj).next().find('.active').text()) == '') {
+                    //this.pingZhengModel.rows[_$(obj).closest("tr").index()][type] = $.trim(_$(obj).next().find(".active").text())
                 } else {
-                    this.pingZhengModel.rows[$(obj).closest('tr').index()][type] = $.trim($(obj).next().find('.active').text());
+                    this.pingZhengModel.rows[_$(obj).closest('tr').index()][type] = $.trim(_$(obj).next().find('.active').text());
                 }
-                $(obj).next().hide();
+                _$(obj).next().hide();
                 /*setTimeout(function () {
                     vueObj.colFeed(obj)
                 }, 100)*/
             },
             textareaEnter2(obj, type, event) {
-                if ($(obj).next().css('display') == 'block') {
-                    this.pingZhengModel.rows[$(obj).closest('tr').index()][type] = $.trim($(obj).next().find('.active').attr('ccode')) + ' ' + $.trim($(obj).next().find('.active').attr('ccodepath'));
-                    this.pingZhengModel.rows[$(obj).closest('tr').index()][type + '_num'] = $(obj).next().find('.active').attr('money');
+                if (_$(obj).next().css('display') == 'block') {
+                    this.pingZhengModel.rows[_$(obj).closest('tr').index()][type] = $.trim(_$(obj).next().find('.active').attr('ccode')) + ' ' + $.trim(_$(obj).next().find('.active').attr('ccodepath'));
+                    this.pingZhengModel.rows[_$(obj).closest('tr').index()][type + '_num'] = _$(obj).next().find('.active').attr('money');
                 }
-                $(obj).val($(obj).val().replace('\n', ''));
-                this.getBalance($(obj).closest('td').find('.balance span'), $(obj).next().find('.active').attr('money'), $(obj).closest('tr').index());
-                $(obj).closest('td').find('ul').hide();
+                _$(obj).val(_$(obj).val().replace('\n', ''));
+                this.getBalance(_$(obj).closest('td').find('.balance span'), _$(obj).next().find('.active').attr('money'), _$(obj).closest('tr').index());
+                _$(obj).closest('td').find('ul').hide();
                 if (this.tShowBan == true) {
-                    this.rowFeed($(obj).closest('tr'));
+                    this.rowFeed(_$(obj).closest('tr'));
 
                 } else {
                     this.colFeedJ(obj);
@@ -779,7 +779,7 @@ function getBaseMixin() {
                     if (this.billSumMoneyJM > this.billSumMoneyDM) {
                         if (this.Subtr(this.billSumMoneyDM, this.billSumMoneyJM) != 0) {
                             this.$nextTick(function() {
-                                const obj = $(this.$refs['dGrid' + (lineNum + 1)][0]);
+                                const obj = _$(this.$refs['dGrid' + (lineNum + 1)][0]);
                                 this.clearLeftVal(obj);
                                 this.rowsWatch(this.pingZhengModel.rows);
                                 this.pingZhengModel.rows[lineNum + 1].daiMoney = this.Subtr(this.billSumMoneyJM, this.billSumMoneyDM);
@@ -791,7 +791,7 @@ function getBaseMixin() {
                     } else {
                         if (this.Subtr(this.billSumMoneyDM, this.billSumMoneyJM) != 0) {
                             this.$nextTick(function() {
-                                const obj = $(this.$refs['jGrid' + (lineNum + 1)][0]);
+                                const obj = _$(this.$refs['jGrid' + (lineNum + 1)][0]);
                                 this.clearRightVal(obj);
                                 this.rowsWatch(this.pingZhengModel.rows);
                                 this.pingZhengModel.rows[lineNum + 1].jieMoney = this.Subtr(this.billSumMoneyDM, this.billSumMoneyJM);
@@ -807,28 +807,28 @@ function getBaseMixin() {
             // 上下键选择列表
             ulKeyup(point, obj) {
                 // 初始位置
-                if ($(obj).parent().find('.active').length == 0) {
-                    $('td>li').removeClass('active');
-                    $(obj).parent().find('li:first').toggleClass('active');
+                if (_$(obj).parent().find('.active').length == 0) {
+                    _$('td>li').removeClass('active');
+                    _$(obj).parent().find('li:first').toggleClass('active');
                     return;
                 }
                 if (point == 'up') {
-                    if ($(obj).parent().find('.active').index() != 0) {
-                        const temp = $(obj).parent().find('.active');
-                        $(obj).parent().find('.active').prev().addClass('active');
+                    if (_$(obj).parent().find('.active').index() != 0) {
+                        const temp = _$(obj).parent().find('.active');
+                        _$(obj).parent().find('.active').prev().addClass('active');
                         temp.removeClass('active');
                     }
                 } else if (point == 'down') {
-                    if ($(obj).parent().find('.active').index() + 1 != $(obj).parent().find('li').length) {
-                        const temp = $(obj).parent().find('.active');
-                        $(obj).parent().find('.active').next().addClass('active');
+                    if (_$(obj).parent().find('.active').index() + 1 != _$(obj).parent().find('li').length) {
+                        const temp = _$(obj).parent().find('.active');
+                        _$(obj).parent().find('.active').next().addClass('active');
                         temp.removeClass('active');
                     }
                 }
-                const objPointerHeight = $(obj).parent().find('.active')[0].offsetTop;
-                const objHeight = $(obj).parent().find('.active').outerHeight();
+                const objPointerHeight = _$(obj).parent().find('.active')[0].offsetTop;
+                const objHeight = _$(obj).parent().find('.active').outerHeight();
                 if (objPointerHeight - 3 > objHeight * 4) {
-                    $(obj).closest('td').find('ul').scrollTop(objPointerHeight - objHeight * 4);
+                    _$(obj).closest('td').find('ul').scrollTop(objPointerHeight - objHeight * 4);
                 }
             },
             openAddSubjectPage(tr, obj) {
@@ -854,40 +854,40 @@ function getBaseMixin() {
             },
             // 换格
             colFeed(obj) {
-                if ($(obj).closest('td').index() + 1 != $(obj).closest('tr').find('td').length) {
-                    this.tShow($(obj).closest('td').next());
-                    $(obj).closest('td').next().find('textarea').focus();
-                    if ($.trim($(obj).closest('td').next().find('textarea').val()) == '') {
-                        this.kjkmUlShow($(obj).closest('td').next().find('textarea'));
-                        $(obj).closest('td').next().find('ul').show();
-                        $(obj).closest('td').next().find('ul>li:first').addClass('active');
+                if (_$(obj).closest('td').index() + 1 != _$(obj).closest('tr').find('td').length) {
+                    this.tShow(_$(obj).closest('td').next());
+                    _$(obj).closest('td').next().find('textarea').focus();
+                    if ($.trim(_$(obj).closest('td').next().find('textarea').val()) == '') {
+                        this.kjkmUlShow(_$(obj).closest('td').next().find('textarea'));
+                        _$(obj).closest('td').next().find('ul').show();
+                        _$(obj).closest('td').next().find('ul>li:first').addClass('active');
                     }
                 } else {  // 没有下格换行
-                    this.rowFeed($(obj).closest('tr'));
+                    this.rowFeed(_$(obj).closest('tr'));
                 }
             },
             // 借方换格
             colFeedJ(obj) {
-                if ($(obj).closest('li').index() + 1 != $(obj).closest('ul').find('>td').length) {
-                    this.tShow($(obj).closest('li').next());
+                if (_$(obj).closest('li').index() + 1 != _$(obj).closest('ul').find('>td').length) {
+                    this.tShow(_$(obj).closest('li').next());
                     setTimeout(function() {
-                        $(obj).closest('li').next().find('ul').css('display', 'none');
-                        $(obj).closest('li').next().find('textarea').show();
-                        $(obj).closest('li').next().find('textarea').focus();
-                        $(obj).closest('li').next().find('ul').hide();
+                        _$(obj).closest('li').next().find('ul').css('display', 'none');
+                        _$(obj).closest('li').next().find('textarea').show();
+                        _$(obj).closest('li').next().find('textarea').focus();
+                        _$(obj).closest('li').next().find('ul').hide();
                     }, 200);
                 } else {  // 没有下格换行
-                    this.rowFeed($(obj).closest('ul'));
+                    this.rowFeed(_$(obj).closest('ul'));
                 }
             },
             // 贷方换格
             colFeedD(obj, i) {
                 const vueObj = this;
-                this.rowFeed($(obj).closest('tr'));
+                this.rowFeed(_$(obj).closest('tr'));
                 if (this.billSumMoneyJM > this.billSumMoneyDM) {
                     if (this.Subtr(this.billSumMoneyDM, this.billSumMoneyJM) != 0) {
                         this.$nextTick(function() {
-                            const o = $(obj).closest('tr').next().find('td:last>textarea');
+                            const o = _$(obj).closest('tr').next().find('td:last>textarea');
                             this.pingZhengModel.rows[i + 1].daiMoney = this.Subtr(this.billSumMoneyJM, this.billSumMoneyDM);
                             o.val(this.Subtr(this.billSumMoneyJM, this.billSumMoneyDM));
                             vueObj.formatMoney(o, 'daiMoney');
@@ -898,7 +898,7 @@ function getBaseMixin() {
                 } else {
                     if (this.Subtr(this.billSumMoneyDM, this.billSumMoneyJM) != 0) {
                         this.$nextTick(function() {
-                            const o = $(obj).closest('tr').next().find('td:eq(-2)>textarea');
+                            const o = _$(obj).closest('tr').next().find('td:eq(-2)>textarea');
                             this.pingZhengModel.rows[i + 1].jieMoney = this.Subtr(this.billSumMoneyDM, this.billSumMoneyJM);
                             o.val(this.Subtr(this.billSumMoneyDM, this.billSumMoneyJM));
                             vueObj.formatMoney(o, 'jieMoney');
@@ -925,7 +925,7 @@ function getBaseMixin() {
             },
             // 没有下一行新增一行
             rowFeed(obj) {
-                if ($(obj).index() + 1 == $(obj).closest('ul').find('ul').length) {
+                if (_$(obj).index() + 1 == _$(obj).closest('ul').find('ul').length) {
                     this.pingZhengModel.rows.push(createPingZhengRowModel({
                         zhaiYao: '',
                         kuaiJiKeMuCode: '',
@@ -933,17 +933,17 @@ function getBaseMixin() {
                         daiMoney: '0.00'
                     }));
                     this.$nextTick(function() {
-                        $('#app tbody>tr:eq(-2)>td:first>textarea').focus();
-                        this.rowFeedInit($(obj).index());
+                        _$('#app tbody>tr:eq(-2)>td:first>textarea').focus();
+                        this.rowFeedInit(_$(obj).index());
                     });
                 } else {
-                    this.rowFeedInit($(obj).index());
-                    $(obj).closest('ul').next().find('td:first>textarea').focus();
-                    $(obj).closest('ul').addClass('trFocusColor');
-                    $('.voucher-item').scrollTop($('.voucher-item')[0].scrollHeight - $('.voucher-item').height());
+                    this.rowFeedInit(_$(obj).index());
+                    _$(obj).closest('ul').next().find('td:first>textarea').focus();
+                    _$(obj).closest('ul').addClass('trFocusColor');
+                    _$('.voucher-item').scrollTop(_$('.voucher-item')[0].scrollHeight - _$('.voucher-item').height());
                 }
                 setTimeout(function() {
-                    $('.voucher-item').scrollTop($('.voucher-item')[0].scrollHeight);
+                    _$('.voucher-item').scrollTop(_$('.voucher-item')[0].scrollHeight);
                 }, 100);
             },
             // 换行后执行的方法
@@ -953,16 +953,16 @@ function getBaseMixin() {
             },
             // 转换金额格式
             formatMoney(obj, type) {
-                // let moneyArr = this.formatMoneyAPI($(obj).val() == 0 ? "" : $(obj).val());
-                // this.pingZhengModel.rows[$(obj).closest("ul").index()][type + "1"] = moneyArr;
+                // let moneyArr = this.formatMoneyAPI(_$(obj).val() == 0 ? "" : _$(obj).val());
+                // this.pingZhengModel.rows[_$(obj).closest("ul").index()][type + "1"] = moneyArr;
 
             },
             // 摘要列表
             abstractUl(obj) {
-                if ($(obj).closest('td').find('ul').css('display') == 'none') {
+                if (_$(obj).closest('td').find('ul').css('display') == 'none') {
                     this.abstractFindSrows(obj);
                 } else {
-                    $(obj).closest('td').find('ul').hide();
+                    _$(obj).closest('td').find('ul').hide();
                 }
             },
             // 转换金额格式
@@ -1016,14 +1016,14 @@ function getBaseMixin() {
             },
             // 清除借方金额
             clearLeftVal(obj) {
-                $(obj).closest('li').prev().find('textarea').hide();
-                this.pingZhengModel.rows[$(obj).closest('ul').index()].jieMoney = toMoneyStr2(0);
+                _$(obj).closest('li').prev().find('textarea').hide();
+                this.pingZhengModel.rows[_$(obj).closest('ul').index()].jieMoney = toMoneyStr2(0);
             },
             // 清除贷方金额
             clearRightVal(obj) {
-                $(obj).closest('li').next().find('textarea').hide();
+                _$(obj).closest('li').next().find('textarea').hide();
 
-                this.pingZhengModel.rows[$(obj).closest('ul').index()].daiMoney = toMoneyStr2('0');
+                this.pingZhengModel.rows[_$(obj).closest('ul').index()].daiMoney = toMoneyStr2('0');
             },
             // 合计
             billSumMoneyMet() {
@@ -1088,21 +1088,21 @@ function getBaseMixin() {
             kjkmUlHide(obj) {
                 this.subFindSrowsAPI('');
                 this.$nextTick(function() {
-                    $(obj).closest('td').find('ul').hide();
+                    _$(obj).closest('td').find('ul').hide();
                 });
             },
             // 摘要模糊查询
             abstractFindSrows(obj) {
-                $(obj).val($(obj).val().replace('\n', ''));
+                _$(obj).val(_$(obj).val().replace('\n', ''));
                 const arr = [];
                 let bol = false;
                 for (const i in this.abstracts) {
-                    if ($.trim($(obj).val()) == '') {
+                    if ($.trim(_$(obj).val()) == '') {
                         bol = true;
                         this.abstracts[i].hide = false;
                         continue;
                     }
-                    if (this.abstracts[i].accabname.split($.trim($(obj).val())).length > 1) {
+                    if (this.abstracts[i].accabname.split($.trim(_$(obj).val())).length > 1) {
                         this.abstracts[i].hide = false;
                         bol = true;
                     } else {
@@ -1111,22 +1111,22 @@ function getBaseMixin() {
                     }
                 }
                 if (bol) {
-                    $(obj).closest('td').find('ul').show();
+                    _$(obj).closest('td').find('ul').show();
                 } else {
-                    $(obj).closest('td').find('ul').hide();
+                    _$(obj).closest('td').find('ul').hide();
                 }
             },
             // 会计科目模糊查询
             subFindSrows(obj) {
-                $(obj).closest('td').find('.balance span').text('');
-                $(obj).removeAttr('num');
-                $(obj).val($(obj).val().replace('\n', ''));
+                _$(obj).closest('td').find('.balance span').text('');
+                _$(obj).removeAttr('num');
+                _$(obj).val(_$(obj).val().replace('\n', ''));
                 const arr = [];
-                this.subFindSrowsAPI($.trim($(obj).val()));
+                this.subFindSrowsAPI($.trim(_$(obj).val()));
                 setTimeout(function() {
-                    $(obj).closest('td').find('ul').show();
-                    $(obj).closest('td').find('ul>li').removeClass('active');
-                    $(obj).closest('td').find('ul>li:first').addClass('active');
+                    _$(obj).closest('td').find('ul').show();
+                    _$(obj).closest('td').find('ul>li').removeClass('active');
+                    _$(obj).closest('td').find('ul>li:first').addClass('active');
                 }, 550);
             },
             // 会计科目模糊查询Api
@@ -1159,7 +1159,7 @@ function getBaseMixin() {
                 this.$nextTick(function() {
                     let bol = false;
                     for (const i in vueObj.subs) {
-                        if ((vueObj.subs[i].ccode + ' ' + vueObj.subs[i].ccodepath) == $(obj).val()) {
+                        if ((vueObj.subs[i].ccode + ' ' + vueObj.subs[i].ccodepath) == _$(obj).val()) {
                             bol = true;
                         }
                     }
@@ -1167,7 +1167,7 @@ function getBaseMixin() {
                         vueObj.rows[ix]['kuaiJiKeMuFullName'] = '';
                     }
                 });
-                $(obj).closest('td').find('ul').hide();
+                _$(obj).closest('td').find('ul').hide();
             },
             addTr(i) {
 
@@ -1179,7 +1179,7 @@ function getBaseMixin() {
                     daiMoney: '0.00'
                 }));
                 // setTimeout(function () {
-                //     $(".voucher-item").scrollTop($(".voucher-item")[0].scrollHeight);
+                //     _$(".voucher-item").scrollTop(_$(".voucher-item")[0].scrollHeight);
                 // }, 100)
             },
             insertTr(i) {
@@ -1197,7 +1197,7 @@ function getBaseMixin() {
                 // this.assist[i + 1] = this.assist[i]
                 // this.assist[i] = {}
                 // setTimeout(function () {
-                //     $(".voucher-item").scrollTop($(".voucher-item")[0].scrollHeight);
+                //     _$(".voucher-item").scrollTop(_$(".voucher-item")[0].scrollHeight);
                 // }, 100)
             },
             delTr(i) {
@@ -1337,25 +1337,25 @@ function getBaseMixin() {
                     for (const subI in this.subs) {
                         if (this.subs[subI].ccode == this.pingZhengModel.rows[rowsI]['kuaiJiKeMuFullName']) {
                             this.pingZhengModel.rows[rowsI].kuaiJiKeMuFullName = this.subs[subI].ccode + ' ' + this.subs[subI].ccodename;
-                            this.getBalance($('#voucherBill tr:eq(' + rowsI + ')>td:eq(1)').find('.balance span'), this.subs[subI].ccode, rowsI);
+                            this.getBalance(_$('#voucherBill tr:eq(' + rowsI + ')>td:eq(1)').find('.balance span'), this.subs[subI].ccode, rowsI);
                         }
                     }
                 }
             },
             kmSelectChoose() {
-                $('.selectChoose').on('click', function() {
-                    $(this).find('ul').toggle();
+                _$('.selectChoose').on('click', function() {
+                    _$(this).find('ul').toggle();
                 });
-                $('.selectChoose button').on('blur', function() {
+                _$('.selectChoose button').on('blur', function() {
                     const _this = this;
                     setTimeout(function() {
-                        $(_this).closest('div').find('ul').hide();
+                        _$(_this).closest('div').find('ul').hide();
                     }, 100);
                 });
-                $('.selectChoose').on('mouseleave', function() {
+                _$('.selectChoose').on('mouseleave', function() {
                     const _this = this;
                     setTimeout(function() {
-                        $(_this).find('ul').hide();
+                        _$(_this).find('ul').hide();
                     }, 100);
                 });
             },
@@ -1376,7 +1376,7 @@ function getBaseMixin() {
                         _this.dataPageKMAdd.topNameList = res.list
                     },
                     error: function (xhr) {
-                        $('body').html(xhr.responseText)
+                        _$('body').html(xhr.responseText)
                     }
                 });*/
             },
@@ -1406,16 +1406,16 @@ function getBaseMixin() {
 
             },
             backkm(obj) {
-                $(obj).closest('td').find('textarea').click();
+                _$(obj).closest('td').find('textarea').click();
             },
             kmulShow(obj) {
-                $(obj).next().show();
+                _$(obj).next().show();
             },
             kmulShow1(obj) {
-                $(obj).next().toggle();
+                _$(obj).next().toggle();
             },
             kmulHide(obj) {
-                $(obj).closest('.selectChoose').find('ul').hide();
+                _$(obj).closest('.selectChoose').find('ul').hide();
             },
             chooseTopKM(obj, topObj) {
                 const ordervalue = this.jici[0].ordervalue;
@@ -1445,10 +1445,10 @@ function getBaseMixin() {
                                         return false; //阻止系统默认回车事件
                                     }
                                 };
-                                $(document).on('keydown', this.escQuit); //监听键盘事件
+                                _$(document).on('keydown', this.escQuit); //监听键盘事件
                             },
                             end: function() {
-                                $(document).off('keydown', this.escQuit); //解除键盘事件
+                                _$(document).off('keydown', this.escQuit); //解除键盘事件
                             }
                         });
                         bol = true;
@@ -1507,7 +1507,7 @@ function getBaseMixin() {
                     if (this.pingZhengModel.rows.money == undefined) this.pingZhengModel.rows[i].money = '';
 
                     if ($.trim(this.pingZhengModel.rows[i].zhaiYao) != '' || $.trim(this.pingZhengModel.rows[i].kuaiJiKeMuFullName) != '') {
-                        this.getBalance($('#voucherBill tbody tr:eq(' + i + ') td:eq(1) ul'), this.rows[i].kuaiJiKeMuFullName.split(' ')[0], i);
+                        this.getBalance(_$('#voucherBill tbody tr:eq(' + i + ') td:eq(1) ul'), this.rows[i].kuaiJiKeMuFullName.split(' ')[0], i);
                     }
                     this.pingZhengModel.rowsWatch(this.pingZhengModel.rows);
 
@@ -1603,7 +1603,7 @@ function getBaseMixin() {
 
                     this.$nextTick(() => {
                         if (this.showPage) {
-                            $('#voucherBill').css('pointer-events', 'none');
+                            _$('#voucherBill').css('pointer-events', 'none');
                         } else {
                             // setTimeout(()=>{
                             this.$store.state.firstStep = () => {
@@ -1620,7 +1620,7 @@ function getBaseMixin() {
 
 
                         this.kmSelectChoose();
-                        $('.voucher-item').scroll(() => $('.ulX').hide());
+                        _$('.voucher-item').scroll(() => _$('.ulX').hide());
                     });
                 },
                 immediate: true
@@ -1647,16 +1647,16 @@ function getBaseMixin() {
         watch: {
             billSumMoneyJM(val) {
                 if (parseInt(val) < 0) {
-                    $('.jSum').css('color', 'red');
+                    _$('.jSum').css('color', 'red');
                 } else {
-                    $('.jSum').css('color', 'black');
+                    _$('.jSum').css('color', 'black');
                 }
             },
             billSumMoneyDM(val) {
                 if (parseInt(val) < 0) {
-                    $('.dSum').css('color', 'red');
+                    _$('.dSum').css('color', 'red');
                 } else {
-                    $('.dSum').css('color', 'black');
+                    _$('.dSum').css('color', 'black');
                 }
             },
             iyear(val) {

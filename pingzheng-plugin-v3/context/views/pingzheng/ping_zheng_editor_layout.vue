@@ -6,125 +6,112 @@
       </h1>
       <div style="margin: -8px auto 0px; width: 1200px; position: relative;">
         <div
-          id="collected"
-          class="div_padding"
-          style="border-radius:20px;position: absolute; bottom: 0px; width: 150px; background: rgb(68, 187, 72); color: white; padding: 6px 10px;"
+            id="collected"
+            class="div_padding"
+            style="border-radius:20px;position: absolute; bottom: 0px; width: 150px; background: rgb(68, 187, 72); color: white; padding: 6px 10px;"
         >
           {{ pingZhengModel.props.date }}
         </div>
-        <div style="margin-left: 160px; height: 37px;" />
+        <div style="margin-left: 160px; height: 37px;"/>
         <div style="position: absolute; font-weight: 900; right: 64px; bottom: 0px; float: right; margin-bottom: 10px;">
           <img
-            src="/ysd/common/img/questionMark.png"
-            title="帮助"
-            @click="thisHelp('《凭证-新增凭证》操作帮助')"
-            style="height: 22px; cursor: pointer; float: left; margin-top: 3%;"
+              src="../../assets/images/questionMark.png"
+              title="帮助"
+              @click="thisHelp('《凭证-新增凭证》操作帮助')"
+              style="height: 22px; cursor: pointer; float: left; margin-top: 3%;"
           >
           <div
-            class="div_padding"
-            @click="openPrint()"
-            style="width: 100px; cursor: pointer; float: left; background: white; color: rgb(40, 180, 164); border: 1px solid rgb(40, 180, 164); margin-left: 30px;border-radius: 20px"
+              class="div_padding"
+              @click="openPrint()"
+              style="width: 100px; cursor: pointer; float: left; background: white; color: rgb(40, 180, 164); border: 1px solid rgb(40, 180, 164); margin-left: 30px;border-radius: 20px"
           >
             打印凭证
           </div>
         </div>
       </div>
-      <div
-        id="pageEditZoom"
-        style="border-radius: 5px;-moz-border-radius: 5px;height:546px;position:relative;box-sizing: border-box;width:1200px;margin:0 auto;width:1200px;padding: 20px 0; border: 1px solid rgb(215, 215, 215); background: white;"
-      >
+      <div id="pageEditZoom">
         <span
-          class="dijitDialogCloseIcon"
-          @click="$parent.popupPage=null"
+            class="dijitDialogCloseIcon"
+            @click="$parent.popupPage=null"
         />
         <div style="margin:30px auto 0;">
           <div
-            :style="EditorType=='show'?'pointer-events: none;':''"
-            style="width:1060px;margin:0 auto;height: 10px"
+              :style="showPingZheng?'pointer-events: none;':''"
+              style="width:1060px;margin:0 auto;height: 10px"
           >
             <div style="float:left;margin-top:-10px;margin-left:0px;">
-              <select
-                style="font-size: 13px;color: black;background-color: #fbfbfb;border: 1px solid #d5d5d5;padding: 6px 12px;border:none;width:90px;text-align:center;text-align-last:center;border-bottom:1px solid black"
-                v-model="pingZhengModel.props.type"
-                @change="switchPage()"
-              >
+              <select v-model="pingZhengModel.props.type"
+                  @change="switchPage()"
+                  class="pageEditZoomSelect">
                 <option v-for="v in vouchTypes">
                   {{ v[1] }}
                 </option>
               </select>
               字 第
-              <input
-                type="text"
-                style="border-radius: 0 !important;
-   font-size: 13px;text-align:center;color: #858585;background-color: #fbfbfb;padding: 6px 12px;box-sizing:border-box;width:65px;    border:none !important;border-bottom: solid 1px black !important; color: black !important;"
-
-                class="voucherNum"
-                v-model="pingZhengModel.props.pingZhengNumOfMonth"
-              >
+              <input type="text"
+                  v-model="pingZhengModel.props.pingZhengNumOfMonth"
+                  class="voucherNum pageEditZoomInput">
               号
             </div>
 
-            <div
-              style="position:absolute;top:49px;text-align:center;color: grey;margin:0 auto;left:calc((100% - 145px)/2) !important; "
+            <div class="pageEditZoomDate"
             >
               <span style="vertical-align: bottom">日期：</span>
-              <!--                     <input type="text" class="Wdate" id="editPageDate66"-->
-              <!--                              style="padding-right: 15px;text-align:center;cursor:pointer;background-size:15px;border:none;color:black;font-weight: 400;border-bottom:solid 1px grey;width:130px;"-->
-              <!--                               v-model="pingZhengModel.props.date"/>-->
-              <el-date-picker
-                style="color:black !important;width:136px;cursor: pointer"
-                v-model="pingZhengModel.props.date"
-                align="right"
-                value-format="yyyy-MM-dd"
-                :clearable="false"
-                type="date"
-                placeholder="选择日期"
-                :picker-options="pingzhengData.pickerOptions"
-              />
+              <el-time-picker
+                  v-model="pingZhengModel.props.date"
+                  format="YYYY-MM-DD"
+                  type="date"
+              >
+              </el-time-picker>
             </div>
             <div style="float:right;color:grey">
-              附单据<input
+              附单据
+              <input
                 type="text"
                 style="color:black;text-align:center; border:none;border-bottom:solid 1px black;width:50px;border-radius: 0 !important;"
                 v-model="pingZhengModel.props.danJuNum"
-              >张
+            >张
             </div>
-            <!--                <div style="    float: right;position: absolute;color: #dadada;top: 10px;right: 17px;font-size: 10px;">-->
-            <!--&lt;!&ndash;                        来源: 默认   &ndash;&gt;-->
-            <!--                    </div>-->
           </div>
           <div
-            v-loading="pingzhengloading"
-            element-loading-text="拼命加载中"
-            element-loading-spinner="el-icon-loading"
-            element-loading-background="rgba(0, 0, 0, 0.8)"
+              v-loading="pingzhengloading"
+              element-loading-text="拼命加载中"
+              element-loading-spinner="el-icon-loading"
+              element-loading-background="rgba(0, 0, 0, 0.8)"
           >
-            <slot />
+            <slot/>
           </div>
         </div>
         <div style="width:1060px;margin:0 auto;padding-top:10px">
           <span style="margin-top:5px;color:#d7d7d7">制单人：{{ pingZhengModel.props.zdr }}</span>
-          <slot name="bottomRightBtns" />
+          <slot name="bottomRightBtns"/>
         </div>
         <div
-          class="noselect"
-          style="position: absolute;     bottom: 46px;left: 528px;"
+            class="noselect"
+            style="position: absolute;     bottom: 46px;left: 528px;"
         >
-          <pingzhengPaging />
+          <!--          <pingzhengPaging />-->
         </div>
       </div>
     </div>
   </div>
 </template>
 <script lang="ts" setup>
+import {computed} from 'vue';
 import {pingZhengModelStore} from '../../store/modules/pingZhengModel';
+import {showPingZhengStore} from '../../store/modules/showPingZheng';
 
-const pingZhengModel = pingZhengModelStore.getPingZhengModel;
+const showPingZheng = computed(() => showPingZhengStore.getShowPingZheng);
+const pingzhengloading = null;
+const vouchTypes = [
+  ['记', '记']
+];
 const pingzhengData = {
   value: '2020-12-12',
   pickerOptions: {
-    // disabledDate: () => {
-    // },
+    disabledDate: () => {
+      alert(1);
+    },
     shortcuts: [{
       text: '今天',
       onClick(picker) {
@@ -147,6 +134,54 @@ const pingzhengData = {
     }]
   }
 };
+const financialTarget = {
+  dateSection: {}
+};
+const forbidAdd = false;
+
+
+const pingZhengModel = pingZhengModelStore.getPingZhengModel;
+const EditorType = null;
 </script>
 <style src="../../assets/styles/ping_zheng_editor_layout.css"/>
 <style src="../../assets/styles/ping_zheng_editor_layout.less.css"/>
+<style scoped>
+#pageEditZoom {
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  height: 546px;
+  position: relative;
+  box-sizing: border-box;
+  width: 1200px;
+  margin: 0 auto;
+  width: 1200px;
+  padding: 20px 0;
+  border: 1px solid rgb(215, 215, 215);
+  background: white
+}
+
+#pageEditZoom .pageEditZoomSelect {
+
+  font-size: 13px;
+  color: black;
+  background-color: #fbfbfb;
+  border: 1px solid #d5d5d5;
+  padding: 6px 12px;
+  border: none;
+  width: 90px;
+  text-align: center;
+  text-align-last: center;
+  border-bottom: 1px solid black
+}
+
+#pageEditZoom .pageEditZoomInput {
+  border-radius: 0 !important;
+  font-size: 13px;text-align:center;color: #858585;background-color: #fbfbfb;padding: 6px 12px;box-sizing:border-box;width:65px;    border:none !important;border-bottom: solid 1px black !important; color: black !important;
+
+}
+
+#pageEditZoom .pageEditZoomDate {
+position:absolute;top:49px;text-align:center;color: grey;margin:0 auto;left:calc((100% - 145px)/2) !important;
+
+}
+</style>

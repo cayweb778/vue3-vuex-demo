@@ -1,7 +1,8 @@
 <template>
   <div>
     <div ref="abc">
-      <slot />
+      <slot  />
+      <slot name="bottomRightBtns"/>
     </div>
   </div>
 </template>
@@ -14,21 +15,20 @@ import '@/assets/styles/skin.css'
 // import {useCssLoad} from '../../require-css/index';
 import layer from '../../../../plugins_backup/boozjs-layer/boozjs-layer.es';
 const abc=ref(null)
-import $ from 'jquery'
+import jquery from 'jquery'
 onMounted(()=>{
   const id = layer.open({
     type: 1,
     maxmin: true,
     skin: 'pingZhengTheme-default', //加上边框
     area: ['1300px', '705px'], //宽高
-    content: $(abc.value),
+    content: jquery(abc.value),
     end: () => {
       this.$store.state.close();
     }
 
   });
 })
-console.log(layer);
 // import $ from 'jquery';
 // // useCssLoad(import.meta.url).loadCss(['skin.css']);
 
@@ -53,7 +53,7 @@ console.log(layer);
 //         maxmin: true,
 //         skin: 'pingZhengTheme-default', //加上边框
 //         area: ['1300px', '705px'], //宽高
-//         content: $(this.$refs['content']),
+//         content: jquery(this.$refs['content']),
 //         end: () => {
 //           this.$store.state.close();
 //         }

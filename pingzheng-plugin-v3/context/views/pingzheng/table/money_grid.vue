@@ -1,8 +1,16 @@
+<template>
+  <div style="height: 100%;border-bottom: 0;" ref="abc"/>
+</template>
 <script setup lang="ts">
-import {h, render} from 'vue';
+import {getCurrentInstance, h, onMounted, ref, render, useContext} from 'vue';
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 // @ts-nocheck
 import './money_grid.css';
+
+const {slots} = useContext();
+const abc = ref(null);
+
+const moneyBase = ['百', '十', '亿', '千', '百', '十', '万', '千', '百', '十', '元', '角', '分'];
 
 // 转换金额格式
 function formatMoneyAPI(moneyStr) {
@@ -19,10 +27,10 @@ function formatMoneyAPI(moneyStr) {
       moneyStr[0] = moneyStr[0].substring(1, moneyStr[0].length);
     }
     var num = moneyStr[0].split('');
-    for (let i = 0; i < Object.getOwnPropertyNames(_moneyBase).length - 2 - num.length - 1; i++) {
+    for (let i = 0; i < Object.getOwnPropertyNames(moneyBase).length - 2 - num.length - 1; i++) {
       empty.push('');
     }
-    const float = moneyStr[1].split('');
+    let float = moneyStr[1].split('');
     if (float.length == 1) {
       float.push('0');
     }
@@ -39,7 +47,7 @@ function formatMoneyAPI(moneyStr) {
     if (num[num.length - 1] == '\n') {
       num.pop();
     }
-    for (let i = 0; i < Object.getOwnPropertyNames(_moneyBase).length - 2 - num.length - 1; i++) {
+    for (let i = 0; i < Object.getOwnPropertyNames(moneyBase).length - 2 - num.length - 1; i++) {
       empty.push('');
     }
     if (!moneyStr[0] == '') {
@@ -53,6 +61,8 @@ function formatMoneyAPI(moneyStr) {
   }
   return moneyStr;
 }
+
+const {emit} = useContext();
 
 function getChineseMoneyGrid(h) {
   const chineseMoneyArr = [
@@ -72,54 +82,49 @@ function getChineseMoneyGrid(h) {
   ];
   const moneyGrid = h('ul',
       {
-        attrs: {
-          class: 'moneyGrid',
-          style: 'height:15px;text-align: center;font-size:12px'
-        },
-        on: {
-          'click': (value) => {
-            this.showUl = false;
-          }
-        }
+
+        class: 'moneyGrid',
+        style: 'height:15px;text-align: center;font-size:12px',
+
       },
       Array.apply(null, {length: 13}).map((row, i) => {
         return h('li', {
           on: {
             click: () => {
-              this.$emit('click', this.$el);
+              // emit('click', this.$el);
             }
           }
         }, chineseMoneyArr[i]);
       }));
   return moneyGrid;
 }
+const a=getCurrentInstance()
 
-if (this.$slots.default == null) {
-  getChineseMoneyGrid(h);
-}
-const moneyArr = (formatMoneyAPI(this.$slots.default[0].text));
-const isNeg = this.$slots.default[0].text < 0;
-
-
-const vnode = h('ul',
-    {
-      attrs: {
+onMounted(() => {
+  if (slots.default == null) {
+    render(getChineseMoneyGrid(h), abc.value);
+    return;
+  }
+  const text = slots.default()[0].children;
+  const moneyArr = (formatMoneyAPI(text));
+  const isNeg = text < 0;
+  render(h('ul',
+      {
+        // onClick: (e) => {
+        //   e
+        //   this.showUl = false;
+        // },
         class: 'moneyGrid ' + (isNeg ? 'isNeg' : ''),
         style: ' width: 101.04%; position: absolute; top: 0px; z-index: 2; font-size: 20px; font-weight: 700; height: 100%;'
-      }
-    },
-    Array.apply(null, {length: 13}).map((row, i) => {
-      return h('li', {
-        attrs: {
-          style: 'line-height: 58px; width: 15px !important;height:100%;float:left'
-        },
-        on: {
+      },
+      Array.apply(null, {length: 13}).map((row, i) => {
+        return h('li', {
+          style: 'line-height: 58px; width: 15px !important;height:100%;float:left',
           click: () => {
             this.$emit('click', this.$el);
           }
-        }
-      }, moneyArr[i]);
-    }));
-// render(vnode);
+        }, moneyArr[i]);
+      })), abc.value);
+});
 
 </script>

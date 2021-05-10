@@ -36,7 +36,7 @@ function formatMoneyAPI(moneyArr) {
       moneyArr[0] = moneyArr[0].substring(1, moneyArr[0].length);
     }
     var num = moneyArr[0].split('');
-    for (let i = 0; i < Object.getOwnPropertyNames(_moneyBase).length - 2 - num.length - 1; i++) {
+    for (let i = 0; i < Object.getOwnPropertyNames(moneyBase).length - 2 - num.length - 1; i++) {
       empty.push('');
     }
     let float = moneyArr[1].split('');
@@ -56,7 +56,7 @@ function formatMoneyAPI(moneyArr) {
     if (num[num.length - 1] == '\n') {
       num.pop();
     }
-    for (let i = 0; i < Object.getOwnPropertyNames(_moneyBase).length - 2 - num.length - 1; i++) {
+    for (let i = 0; i < Object.getOwnPropertyNames(moneyBase).length - 2 - num.length - 1; i++) {
       empty.push('');
     }
     if (!moneyArr[0] == '') {

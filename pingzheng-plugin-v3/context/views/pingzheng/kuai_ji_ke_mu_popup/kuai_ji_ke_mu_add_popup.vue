@@ -41,8 +41,8 @@
                 @focus="$refs.dataList.style.display='block'"
                 @blur="$refs.dataList.style.display='none'"
                 @input="queryKM(dataPageKMAdd.queryData),$event.target.focus()"
-                @keydown.up="if(chooseIndex>0)chooseIndex--"
-                @keydown.down="if(chooseIndex< dataPageKMAdd.topNameList.length-1)chooseIndex++"
+                @keydown.up="topSubjectInputKeyDownUp"
+                @keydown.down="topSubjectInputKeyDownDown"
                 @keyup.enter="$refs.dataList.getElementsByTagName('LI')[chooseIndex].click(),setTimeout(()=>{$refs['kuaiJiKeMuNumInput'].click()},100)"
                 v-model="dataPageKMAdd.queryData.like"
                 style="width:260px;cursor: pointer;text-align: center"
@@ -74,10 +74,9 @@
               ref="kuaiJiKeMuNumInput"
               readonly="readonly"
               onclick="this.select();"
-              style="cursor: pointer"
+              style="width:260px;cursor: pointer"
               @keyup.enter="$refs['kmAddPageAffirm'].click()"
               v-model="dataPageKMAdd.addData.ccodeNum"
-              style="width:260px;"
             >
           </li>
 
@@ -150,9 +149,9 @@
 // import {useTextLoad} from '../../../require-text/index';
 
 
-import {computed, onMounted} from 'vue';
+import {computed, onMounted, ref} from 'vue';
 
-const chooseIndex = 0;
+const chooseIndex = ref(0);
 /** 新增科目相关 **/
 const dataPageKMAdd = {
   topNameList: [],
@@ -328,4 +327,11 @@ onMounted(() => {
     this.$refs.KMNameInput.focus();
   }.bind(this));
 });
+function topSubjectInputKeyDownUp(){
+  if(chooseIndex.value>0)chooseIndex.value--
+}
+
+function topSubjectInputKeyDownDown(){
+  if(chooseIndex.value< dataPageKMAdd.topNameList.length-1)chooseIndex.value++
+}
 </script>

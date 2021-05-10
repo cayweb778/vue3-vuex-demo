@@ -1,0 +1,436 @@
+.dy_button {
+    color: white;
+    display: inline-block;
+    white-space: nowrap;
+    background-color: #c81c1c;
+    /* background-image: -webkit-gradient(linear, left top, left bottom, from(#eee), to(#ccc)); */
+    background-image: linear-gradient(to top, #eee, rgb(40, 180, 164));
+
+    border: 1px solid #777;
+    padding: 0 1.5em;
+    margin: 0.5em;
+    font: bold 1em/2em Arial, Helvetica;
+    text-decoration: none;
+    color: #333;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, .8);
+    -moz-border-radius: .2em;
+    -webkit-border-radius: .2em;
+    border-radius: .2em;
+    -moz-box-shadow: 0 0 1px 1px rgba(255, 255, 255, .8) inset, 0 1px 0 rgba(0, 0, 0, .3);
+    -webkit-box-shadow: 0 0 1px 1px rgba(255, 255, 255, .8) inset, 0 1px 0 rgba(0, 0, 0, .3);
+    box-shadow: 0 0 1px 1px rgba(255, 255, 255, .8) inset, 0 1px 0 rgba(0, 0, 0, .3);
+}
+
+.dy_button:hover {
+    background-color: #eee;
+
+    background-image: -webkit-linear-gradient(to top, #eee, rgb(40, 180, 164));
+}
+
+html {
+    height: 100%;
+}
+
+.dy_button_msg {
+    padding: 3px 20px;
+    border-radius: 30px;
+    background: rgb(47, 150, 136);
+    color: white;
+}
+
+.dy_button_error {
+    padding: 3px 20px;
+    border-radius: 30px;
+    background: #ff667b;
+    color: white;
+}
+
+.dy_button_emply{
+    cursor: pointer;
+    float: left;
+    color: white !important;
+    border: 1px solid white;
+    margin-left: 30px;
+    padding: 3px 1px;
+    background:rgb(40, 180, 164);
+    width: 88px;
+    text-align: center;
+    border-radius: 20px;
+}
+
+
+
+.inp_empty {
+    cursor: pointer;
+    float: left;
+    background: white;
+    color: rgb(40, 180, 164);
+    border: 1px solid rgb(40, 180, 164);
+    margin-left: 30px;
+    padding: 5px 1px;
+    width: 118px;
+    text-align: center;
+    border-radius: 20px;
+    border-color: #28b4a4;
+}
+
+.selectChoose {
+    position: relative;
+    width:120px;
+    float:left;
+}
+
+.selectChoose li {
+    cursor: pointer;
+}
+
+.selectChoose ul {
+    text-align: center !important;
+    color: white  !important;;
+    position: absolute !important;;
+    top: 29px !important;;
+    border-radius: 8px !important;;
+    z-index: 999 !important;;
+    width: 100% !important;;
+    background: #5c917b !important;;
+}
+.selectChoose ul>li{
+    padding:3px 0;
+    font-size:15px;
+    border-radius: 20px;
+}
+.selectChoose li:hover{
+    background: radial-gradient(#a3e8ad, transparent);
+}
+.dy_input {
+    width: 140px;
+    height: 30px;
+    border-radius: 30px;
+    border: solid 1px green;
+    padding-left: 10px;
+}
+.dy_select {
+    width: 140px;
+    height: 30px;
+    border-radius: 30px;
+    border: solid 1px green;
+    padding-left: 10px;
+}
+.select2-selection{
+    text-align: center;
+}
+.dy_table_thead_tr{
+    background-color: #cbdfdf !important;
+}
+.dy_table_thead_tr th{
+    border: solid 1px #b4b4b4;
+}
+#tabs #current a, #tabs #current a::after{
+    background: rgb(0,150,136) !important;
+    color: white !important;;
+}
+#tabs{
+    font-weight:700
+}
+.dy_table_thead_tr tr{
+    background-color: #cbdfdf !important;
+}
+#content{
+    box-sizing: border-box;
+}
+#tbody::-webkit-scrollbar {
+    width: 10px !important;
+}
+#tbody::-webkit-scrollbar-thumb{
+    border-radius: 5px;
+    background: #b2afaf;
+}
+
+.g-btn-primary {
+    border: 2px solid white;
+    box-shadow: 0 0 10px #2A4F7A;
+    color:white;
+    height:24px;
+    border-radius:25px;
+    font-style: normal;
+}
+.g-btn-primary:hover {
+    background: #12608d !important;
+}
+
+.hkj .voucherTemplatesDialog .voucherTemplatesDialogPanel .templatesWrapper .templatesContent .ul li {
+    padding: 0 !important;
+    height: 20px !important;
+}
+/*棰濆鍔犱笂loading鐨勬牱寮�*/
+.loadingBox {
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+    z-index: 2000;
+}
+
+.loadingBox .el-mask {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #000 !important;
+    opacity: 0.5;
+    z-index: 1001;
+}
+
+.loadingBox .x-loading {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 150px;
+    height: 120px;
+    margin: -75px 0 0 -60px;
+    z-index: 1003;
+    /*cc_loading*/
+}
+
+.loadingBox .loading-text {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    width: 150px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: #666;
+    text-align: center;
+}
+
+.ulM > li:last-child {
+    width: 7.2% !important;
+}
+.noselect {
+
+    -webkit-touch-callout: none; /* iOS Safari */
+
+    -webkit-user-select: none; /* Chrome/Safari/Opera */
+
+    -khtml-user-select: none; /* Konqueror */
+
+    -moz-user-select: none; /* Firefox */
+
+    -ms-user-select: none; /* Internet Explorer/Edge */
+
+    user-select: none;
+    /* Non-prefixed version, currently
+
+   not supported by any browser */
+
+}
+
+.minus {
+    color: red
+}
+
+td, th {
+    border: solid 1px #cccccc;
+    height: 60px;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+ul > li {
+    list-style: none;
+}
+
+.ulX {
+    display: none;
+}
+
+.ulM {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.ulM > li {
+    float: left;
+    height: 100%;
+    width: 17px;
+    height: 100%;
+}
+
+.ulX {
+    z-index: 100;
+}
+
+.closeImg {
+    content: url('<%=request.getContextPath()%>/module/_sys/common/img/svg/鍏抽棴.svg');
+    width: 10px
+}
+
+.textx {
+    display: none;
+    vertical-align: center;
+    text-align: right;
+    font-size: 26px;
+    width: 100%;
+    height: 100%
+}
+
+#app thead td {
+    height: 40px;
+    text-align: center;
+    font-weight: 900;
+}
+
+.ulM > li {
+    border-right: solid 1px #d7d7d7;
+    box-sizing: border-box;
+    text-align: center
+}
+
+body {
+    background: #F2F4F6
+}
+
+#app {
+    padding: 0 20px
+}
+
+td > textarea {
+    background: inherit;
+}
+
+textarea {
+    width: 100%;
+    height: 100%;
+    resize: none;
+    border: none;
+}
+
+tr:hover, td > textarea:hover {
+    background: #F2F4F6;
+}
+
+textarea:focus {
+    border: 2px solid #54c9ca;
+}
+
+textarea {
+    cursor: default;
+}
+
+.ulX > li:hover {
+    background: #44BB48;
+}
+
+.ulM > li:nth-of-type(2) {
+    border-right: solid #a5d9f6 1px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box; /* Firefox */
+    -webkit-box-sizing: border-box; /* Safari */
+}
+
+.ulM > li:nth-of-type(5) {
+    border-right: solid #a5d9f6 1px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box; /* Firefox */
+    -webkit-box-sizing: border-box; /* Safari */
+}
+
+.ulM > li:nth-of-type(8) {
+    border-right: solid #a5d9f6 1px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box; /* Firefox */
+    -webkit-box-sizing: border-box; /* Safari */
+}
+
+.ulM > li:nth-of-type(11) {
+    border-right: solid #eeb9b9 1.5px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box; /* Firefox */
+    -webkit-box-sizing: border-box; /* Safari */
+}
+
+.ulM > li:last-child {
+    border-right: none;
+}
+
+.div_padding {
+    padding: 5px 1px;
+    width: 118px;
+    text-align: center;
+    border-radius: 20px;
+    border-color: #28b4a4;
+}
+
+#voucherBill tr {
+    position: relative;
+}
+
+selector::-webkit-scrollbar {
+    position: fixed;
+
+}
+
+textarea, input, select {
+    font-family: inherit;
+}
+
+.hkj .voucherTemplatesDialog .voucherTemplatesDialogPanel .templatesWrapper .templatesContent li {
+    height: 54px !important;
+}
+
+.hkj .voucherTemplatesDialog .voucherTemplatesDialogPanel .templatesWrapper .templatesContent li .pzContent {
+    height: 54px !important;
+}
+body:before {
+    background-color: #F2F4F6;
+}
+
+#voucherBill tr:first-child td {
+    border-top: 0;
+}
+
+.template_btn:hover {
+    background: #93D200 !important;
+    color: white !important;
+}
+
+.leftPoint {
+    pointer-events: none
+}
+
+.rightPoint {
+    pointer-events: none
+}
+
+
+.leftPoint img {
+    content: url("./svg/newVouch/left.svg");
+    pointer-events: none
+}
+
+.leftPointActive img {
+    content: url("./svg/newVouch/leftActive.svg");
+}
+
+.rightPoint img {
+    content: url("./svg/newVouch/right.svg");
+    pointer-events: none
+}
+
+.rightPointActive img {
+    content: url("./svg/newVouch/rightActive.svg");
+}
+
+.subtractionImg {
+    content: url("./img/加.png");
+}
+
+.addImg {
+    content: url("./img/减.png");
+}
